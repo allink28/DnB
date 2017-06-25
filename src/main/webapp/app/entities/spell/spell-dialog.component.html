@@ -1,0 +1,83 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySpellLabel">Create or edit a Spell</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!spell.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="spell.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="spell.name" required />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_level">Level</label>
+            <input type="number" class="form-control" name="level" id="field_level"
+                [(ngModel)]="spell.level"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                [(ngModel)]="spell.type"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_range">Range</label>
+            <input type="text" class="form-control" name="range" id="field_range"
+                [(ngModel)]="spell.range"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_castTime">Cast Time</label>
+            <input type="text" class="form-control" name="castTime" id="field_castTime"
+                [(ngModel)]="spell.castTime"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_components">Components</label>
+            <input type="text" class="form-control" name="components" id="field_components"
+                [(ngModel)]="spell.components"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_duration">Duration</label>
+            <input type="text" class="form-control" name="duration" id="field_duration"
+                [(ngModel)]="spell.duration"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="spell.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_damage">Damage</label>
+            <input type="text" class="form-control" name="damage" id="field_damage"
+                [(ngModel)]="spell.damage"  />
+        </div>
+
+        <div class="form-group">
+            <label for="field_character">Character</label>
+            <select class="form-control" id="field_character" name="character" [(ngModel)]="spell.character" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="characterOption.id === spell.character?.id ? spell.character : characterOption" *ngFor="let characterOption of characters; trackBy: trackCharacterById">{{characterOption.spells}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

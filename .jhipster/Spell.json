@@ -1,0 +1,58 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "character",
+            "otherEntityName": "character",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [],
+            "otherEntityField": "spells"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "level",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "range",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "castTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "components",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "damage",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170625033052",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "spell",
+    "pagination": "pagination"
+}

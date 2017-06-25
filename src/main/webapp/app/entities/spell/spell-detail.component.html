@@ -1,0 +1,63 @@
+
+<div *ngIf="spell">
+    <h2><span>Spell</span> {{spell.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{spell.name}}</span>
+        </dd>
+        <dt><span>Level</span></dt>
+        <dd>
+            <span>{{spell.level}}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{spell.type}}</span>
+        </dd>
+        <dt><span>Range</span></dt>
+        <dd>
+            <span>{{spell.range}}</span>
+        </dd>
+        <dt><span>Cast Time</span></dt>
+        <dd>
+            <span>{{spell.castTime}}</span>
+        </dd>
+        <dt><span>Components</span></dt>
+        <dd>
+            <span>{{spell.components}}</span>
+        </dd>
+        <dt><span>Duration</span></dt>
+        <dd>
+            <span>{{spell.duration}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{spell.description}}</span>
+        </dd>
+        <dt><span>Damage</span></dt>
+        <dd>
+            <span>{{spell.damage}}</span>
+        </dd>
+        <dt><span>Character</span></dt>
+        <dd>
+            <div *ngIf="spell.character">
+                <a [routerLink]="['/character', spell.character?.id]">{{spell.character?.spells}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'spell/'+ spell.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
