@@ -31,11 +31,21 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="exp"><span>Exp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="level"><span>Level</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="classes"><span>Classes</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="sex"><span>Sex</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="height"><span>Height</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="weight"><span>Weight</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="maxHP"><span>Max HP</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="currentHP"><span>Current HP</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="strength"><span>Strength</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dexterity"><span>Dexterity</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="wisdom"><span>Wisdom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="intelligence"><span>Intelligence</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="charisma"><span>Charisma</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="alignment"><span>Alignment</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="background"><span>Background</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,11 +53,21 @@
             <tr *ngFor="let character of characters ;trackBy: trackId">
                 <td><a [routerLink]="['../character', character.id ]">{{character.id}}</a></td>
                 <td>{{character.name}}</td>
+                <td>{{character.exp}}</td>
                 <td>{{character.level}}</td>
                 <td>{{character.classes}}</td>
                 <td>{{character.sex}}</td>
                 <td>{{character.height}}</td>
                 <td>{{character.weight}}</td>
+                <td>{{character.maxHP}}</td>
+                <td>{{character.currentHP}}</td>
+                <td>{{character.strength}}</td>
+                <td>{{character.dexterity}}</td>
+                <td>{{character.wisdom}}</td>
+                <td>{{character.intelligence}}</td>
+                <td>{{character.charisma}}</td>
+                <td>{{character.alignment}}</td>
+                <td>{{character.background}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -24,6 +24,11 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_exp">Exp</label>
+            <input type="number" class="form-control" name="exp" id="field_exp"
+                [(ngModel)]="character.exp"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_level">Level</label>
             <input type="number" class="form-control" name="level" id="field_level"
                 [(ngModel)]="character.level" required min="0" />
@@ -63,6 +68,60 @@
             <label class="form-control-label" for="field_weight">Weight</label>
             <input type="number" class="form-control" name="weight" id="field_weight"
                 [(ngModel)]="character.weight"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_maxHP">Max HP</label>
+            <input type="number" class="form-control" name="maxHP" id="field_maxHP"
+                [(ngModel)]="character.maxHP"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_currentHP">Current HP</label>
+            <input type="number" class="form-control" name="currentHP" id="field_currentHP"
+                [(ngModel)]="character.currentHP"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_strength">Strength</label>
+            <input type="number" class="form-control" name="strength" id="field_strength"
+                [(ngModel)]="character.strength"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dexterity">Dexterity</label>
+            <input type="number" class="form-control" name="dexterity" id="field_dexterity"
+                [(ngModel)]="character.dexterity"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_wisdom">Wisdom</label>
+            <input type="number" class="form-control" name="wisdom" id="field_wisdom"
+                [(ngModel)]="character.wisdom"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_intelligence">Intelligence</label>
+            <input type="number" class="form-control" name="intelligence" id="field_intelligence"
+                [(ngModel)]="character.intelligence"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_charisma">Charisma</label>
+            <input type="number" class="form-control" name="charisma" id="field_charisma"
+                [(ngModel)]="character.charisma"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_alignment">Alignment</label>
+            <select class="form-control" name="alignment" [(ngModel)]="character.alignment" id="field_alignment" >
+                <option value="lawful_good">lawful_good</option>
+                <option value="neutral_good">neutral_good</option>
+                <option value="chaotic_good">chaotic_good</option>
+                <option value="lawful_neutral">lawful_neutral</option>
+                <option value="true_neutral">true_neutral</option>
+                <option value="chaotic_neutral">chaotic_neutral</option>
+                <option value="lawful_evil">lawful_evil</option>
+                <option value="neutral_evil">neutral_evil</option>
+                <option value="chaotic_evil">chaotic_evil</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_background">Background</label>
+            <input type="text" class="form-control" name="background" id="field_background"
+                [(ngModel)]="character.background"  />
         </div>
 
     </div>

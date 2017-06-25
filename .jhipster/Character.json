@@ -17,6 +17,10 @@
             ]
         },
         {
+            "fieldName": "exp",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "level",
             "fieldType": "Integer",
             "fieldValidateRules": [
@@ -41,9 +45,46 @@
         {
             "fieldName": "weight",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxHP",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "currentHP",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "strength",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dexterity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "wisdom",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "intelligence",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "charisma",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "alignment",
+            "fieldType": "Alignment",
+            "fieldValues": "lawful_good,neutral_good,chaotic_good,lawful_neutral,true_neutral,chaotic_neutral,lawful_evil,neutral_evil,chaotic_evil"
+        },
+        {
+            "fieldName": "background",
+            "fieldType": "String"
         }
     ],
-    "changelogDate": "20170625020514",
+    "changelogDate": "20170626000000",
     "dto": "no",
     "service": "serviceClass",
     "entityTableName": "jhi_character",

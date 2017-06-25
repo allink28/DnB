@@ -14,6 +14,8 @@ import java.util.Objects;
 
 import allink28.dnb.domain.enumeration.Sex;
 
+import allink28.dnb.domain.enumeration.Alignment;
+
 /**
  * A Character.
  */
@@ -33,6 +35,9 @@ public class Character implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "exp")
+    private Long exp;
+
     @NotNull
     @Min(value = 0)
     @Column(name = "jhi_level", nullable = false)
@@ -50,6 +55,34 @@ public class Character implements Serializable {
 
     @Column(name = "weight")
     private Integer weight;
+
+    @Column(name = "max_hp")
+    private Integer maxHP;
+
+    @Column(name = "current_hp")
+    private Integer currentHP;
+
+    @Column(name = "strength")
+    private Integer strength;
+
+    @Column(name = "dexterity")
+    private Integer dexterity;
+
+    @Column(name = "wisdom")
+    private Integer wisdom;
+
+    @Column(name = "intelligence")
+    private Integer intelligence;
+
+    @Column(name = "charisma")
+    private Integer charisma;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "alignment")
+    private Alignment alignment;
+
+    @Column(name = "background")
+    private String background;
 
     @OneToMany(mappedBy = "character")
     @JsonIgnore
@@ -75,6 +108,19 @@ public class Character implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getExp() {
+        return exp;
+    }
+
+    public Character exp(Long exp) {
+        this.exp = exp;
+        return this;
+    }
+
+    public void setExp(Long exp) {
+        this.exp = exp;
     }
 
     public Integer getLevel() {
@@ -142,6 +188,123 @@ public class Character implements Serializable {
         this.weight = weight;
     }
 
+    public Integer getMaxHP() {
+        return maxHP;
+    }
+
+    public Character maxHP(Integer maxHP) {
+        this.maxHP = maxHP;
+        return this;
+    }
+
+    public void setMaxHP(Integer maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    public Integer getCurrentHP() {
+        return currentHP;
+    }
+
+    public Character currentHP(Integer currentHP) {
+        this.currentHP = currentHP;
+        return this;
+    }
+
+    public void setCurrentHP(Integer currentHP) {
+        this.currentHP = currentHP;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public Character strength(Integer strength) {
+        this.strength = strength;
+        return this;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Integer getDexterity() {
+        return dexterity;
+    }
+
+    public Character dexterity(Integer dexterity) {
+        this.dexterity = dexterity;
+        return this;
+    }
+
+    public void setDexterity(Integer dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public Integer getWisdom() {
+        return wisdom;
+    }
+
+    public Character wisdom(Integer wisdom) {
+        this.wisdom = wisdom;
+        return this;
+    }
+
+    public void setWisdom(Integer wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    public Integer getIntelligence() {
+        return intelligence;
+    }
+
+    public Character intelligence(Integer intelligence) {
+        this.intelligence = intelligence;
+        return this;
+    }
+
+    public void setIntelligence(Integer intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public Integer getCharisma() {
+        return charisma;
+    }
+
+    public Character charisma(Integer charisma) {
+        this.charisma = charisma;
+        return this;
+    }
+
+    public void setCharisma(Integer charisma) {
+        this.charisma = charisma;
+    }
+
+    public Alignment getAlignment() {
+        return alignment;
+    }
+
+    public Character alignment(Alignment alignment) {
+        this.alignment = alignment;
+        return this;
+    }
+
+    public void setAlignment(Alignment alignment) {
+        this.alignment = alignment;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public Character background(String background) {
+        this.background = background;
+        return this;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
     public Set<Spell> getSpells() {
         return spells;
     }
@@ -192,11 +355,21 @@ public class Character implements Serializable {
         return "Character{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", exp='" + getExp() + "'" +
             ", level='" + getLevel() + "'" +
             ", classes='" + getClasses() + "'" +
             ", sex='" + getSex() + "'" +
             ", height='" + getHeight() + "'" +
             ", weight='" + getWeight() + "'" +
+            ", maxHP='" + getMaxHP() + "'" +
+            ", currentHP='" + getCurrentHP() + "'" +
+            ", strength='" + getStrength() + "'" +
+            ", dexterity='" + getDexterity() + "'" +
+            ", wisdom='" + getWisdom() + "'" +
+            ", intelligence='" + getIntelligence() + "'" +
+            ", charisma='" + getCharisma() + "'" +
+            ", alignment='" + getAlignment() + "'" +
+            ", background='" + getBackground() + "'" +
             "}";
     }
 }
