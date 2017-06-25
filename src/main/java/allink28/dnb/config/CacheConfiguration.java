@@ -43,6 +43,8 @@ public class CacheConfiguration {
             cm.createCache(allink28.dnb.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(allink28.dnb.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(allink28.dnb.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(allink28.dnb.domain.Character.class.getName(), jcacheConfiguration);
+            cm.createCache(allink28.dnb.domain.Character.class.getName() + ".spells", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
