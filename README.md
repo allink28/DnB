@@ -31,6 +31,10 @@ Add the `help` flag on any command to see how you can use it. For example, `yarn
 The `yarn run` command will list all of the scripts available to run for this project.
 
 3. MySQL : Install mysql and create a database named 'dnb'
+         
+       create database dnb;
+       
+This application is configured to login to MySQL DB as user 'root' with password 'password'. The login details can be changed in application-*.yml and pom.xml (for liquibase). 
 
 ### Managing dependencies
 
