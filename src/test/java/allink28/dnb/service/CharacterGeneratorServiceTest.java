@@ -26,4 +26,16 @@ public class CharacterGeneratorServiceTest {
         }
         log.info(logOutput.toString());
     }
+
+    @Test
+    public void randomRaceTest() {
+        StringBuilder logOutput = new StringBuilder("\n");
+        for (int i = 0; i < 20; ++i) {
+            String race = CharacterGeneratorService.randomRace().toString();
+            assertTrue("Race: " + race + " is not correct.",
+                !race.isEmpty() && Character.isUpperCase(race.charAt(0)));
+            logOutput.append(race).append(" ");
+        }
+        log.info(logOutput.toString());
+    }
 }
