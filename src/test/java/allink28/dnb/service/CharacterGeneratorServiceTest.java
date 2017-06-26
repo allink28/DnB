@@ -17,11 +17,13 @@ public class CharacterGeneratorServiceTest {
 
     @Test
     public void generateNameTest() {
+        StringBuilder logOutput = new StringBuilder("\n");
         for (int i = 0; i < 50; ++i) {
             String name = CharacterGeneratorService.generateName();
-            log.info(name);
             assertTrue("Name: " + name + " is not correct.",
                 !name.isEmpty() && Character.isUpperCase(name.charAt(0)));
+            logOutput.append(name).append(" ");
         }
+        log.info(logOutput.toString());
     }
 }
