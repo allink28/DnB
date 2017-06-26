@@ -1,20 +1,20 @@
 package allink28.dnb.domain;
 
+import allink28.dnb.domain.enumeration.Alignment;
+import allink28.dnb.domain.enumeration.Race;
+import allink28.dnb.domain.enumeration.Sex;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import allink28.dnb.domain.enumeration.Sex;
-
-import allink28.dnb.domain.enumeration.Alignment;
+import java.util.Set;
 
 /**
  * A Character.
@@ -83,6 +83,10 @@ public class Character implements Serializable {
 
     @Column(name = "background")
     private String background;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "race")
+    private Race race;
 
     @OneToMany(mappedBy = "character")
     @JsonIgnore
@@ -305,6 +309,19 @@ public class Character implements Serializable {
         this.background = background;
     }
 
+    public Race getRace() {
+        return race;
+    }
+
+    public Character race(Race race) {
+        this.race = race;
+        return this;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
     public Set<Spell> getSpells() {
         return spells;
     }
@@ -370,6 +387,7 @@ public class Character implements Serializable {
             ", charisma='" + getCharisma() + "'" +
             ", alignment='" + getAlignment() + "'" +
             ", background='" + getBackground() + "'" +
+            ", race='" + getRace() + "'" +
             "}";
     }
 }

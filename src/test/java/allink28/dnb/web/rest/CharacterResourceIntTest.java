@@ -1,13 +1,14 @@
 package allink28.dnb.web.rest;
 
 import allink28.dnb.DnBApp;
-
 import allink28.dnb.domain.Character;
+import allink28.dnb.domain.enumeration.Alignment;
+import allink28.dnb.domain.enumeration.Race;
+import allink28.dnb.domain.enumeration.Sex;
 import allink28.dnb.repository.CharacterRepository;
-import allink28.dnb.service.CharacterService;
 import allink28.dnb.repository.search.CharacterSearchRepository;
+import allink28.dnb.service.CharacterService;
 import allink28.dnb.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,9 +30,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import allink28.dnb.domain.enumeration.Sex;
-import allink28.dnb.domain.enumeration.Alignment;
 /**
  * Test class for the CharacterResource REST controller.
  *
@@ -88,6 +86,9 @@ public class CharacterResourceIntTest {
 
     private static final String DEFAULT_BACKGROUND = "AAAAAAAAAA";
     private static final String UPDATED_BACKGROUND = "BBBBBBBBBB";
+
+    private static final Race DEFAULT_RACE = Race.Dragonborn;
+    private static final Race UPDATED_RACE = Race.Dwarf;
 
     @Autowired
     private CharacterRepository characterRepository;
@@ -147,7 +148,8 @@ public class CharacterResourceIntTest {
             .intelligence(DEFAULT_INTELLIGENCE)
             .charisma(DEFAULT_CHARISMA)
             .alignment(DEFAULT_ALIGNMENT)
-            .background(DEFAULT_BACKGROUND);
+            .background(DEFAULT_BACKGROUND)
+            .race(DEFAULT_RACE);
         return character;
     }
 
@@ -188,6 +190,7 @@ public class CharacterResourceIntTest {
         assertThat(testCharacter.getCharisma()).isEqualTo(DEFAULT_CHARISMA);
         assertThat(testCharacter.getAlignment()).isEqualTo(DEFAULT_ALIGNMENT);
         assertThat(testCharacter.getBackground()).isEqualTo(DEFAULT_BACKGROUND);
+        assertThat(testCharacter.getRace()).isEqualTo(DEFAULT_RACE);
 
         // Validate the Character in Elasticsearch
         Character characterEs = characterSearchRepository.findOne(testCharacter.getId());
@@ -275,7 +278,8 @@ public class CharacterResourceIntTest {
             .andExpect(jsonPath("$.[*].intelligence").value(hasItem(DEFAULT_INTELLIGENCE)))
             .andExpect(jsonPath("$.[*].charisma").value(hasItem(DEFAULT_CHARISMA)))
             .andExpect(jsonPath("$.[*].alignment").value(hasItem(DEFAULT_ALIGNMENT.toString())))
-            .andExpect(jsonPath("$.[*].background").value(hasItem(DEFAULT_BACKGROUND.toString())));
+            .andExpect(jsonPath("$.[*].background").value(hasItem(DEFAULT_BACKGROUND.toString())))
+            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE.toString())));
     }
 
     @Test
@@ -304,7 +308,8 @@ public class CharacterResourceIntTest {
             .andExpect(jsonPath("$.intelligence").value(DEFAULT_INTELLIGENCE))
             .andExpect(jsonPath("$.charisma").value(DEFAULT_CHARISMA))
             .andExpect(jsonPath("$.alignment").value(DEFAULT_ALIGNMENT.toString()))
-            .andExpect(jsonPath("$.background").value(DEFAULT_BACKGROUND.toString()));
+            .andExpect(jsonPath("$.background").value(DEFAULT_BACKGROUND.toString()))
+            .andExpect(jsonPath("$.race").value(DEFAULT_RACE.toString()));
     }
 
     @Test
@@ -341,7 +346,8 @@ public class CharacterResourceIntTest {
             .intelligence(UPDATED_INTELLIGENCE)
             .charisma(UPDATED_CHARISMA)
             .alignment(UPDATED_ALIGNMENT)
-            .background(UPDATED_BACKGROUND);
+            .background(UPDATED_BACKGROUND)
+            .race(UPDATED_RACE);
 
         restCharacterMockMvc.perform(put("/api/characters")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -368,6 +374,7 @@ public class CharacterResourceIntTest {
         assertThat(testCharacter.getCharisma()).isEqualTo(UPDATED_CHARISMA);
         assertThat(testCharacter.getAlignment()).isEqualTo(UPDATED_ALIGNMENT);
         assertThat(testCharacter.getBackground()).isEqualTo(UPDATED_BACKGROUND);
+        assertThat(testCharacter.getRace()).isEqualTo(UPDATED_RACE);
 
         // Validate the Character in Elasticsearch
         Character characterEs = characterSearchRepository.findOne(testCharacter.getId());
@@ -440,7 +447,8 @@ public class CharacterResourceIntTest {
             .andExpect(jsonPath("$.[*].intelligence").value(hasItem(DEFAULT_INTELLIGENCE)))
             .andExpect(jsonPath("$.[*].charisma").value(hasItem(DEFAULT_CHARISMA)))
             .andExpect(jsonPath("$.[*].alignment").value(hasItem(DEFAULT_ALIGNMENT.toString())))
-            .andExpect(jsonPath("$.[*].background").value(hasItem(DEFAULT_BACKGROUND.toString())));
+            .andExpect(jsonPath("$.[*].background").value(hasItem(DEFAULT_BACKGROUND.toString())))
+            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE.toString())));
     }
 
     @Test

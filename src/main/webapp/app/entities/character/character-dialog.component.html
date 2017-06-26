@@ -123,6 +123,20 @@
             <input type="text" class="form-control" name="background" id="field_background"
                 [(ngModel)]="character.background"  />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_race">Race</label>
+            <select class="form-control" name="race" [(ngModel)]="character.race" id="field_race" >
+                <option value="Dragonborn">Dragonborn</option>
+                <option value="Dwarf">Dwarf</option>
+                <option value="Elf">Elf</option>
+                <option value="Gnome">Gnome</option>
+                <option value="Half_Elf">Half_Elf</option>
+                <option value="Half_Orc">Half_Orc</option>
+                <option value="Halfling">Halfling</option>
+                <option value="Human">Human</option>
+                <option value="Tiefling">Tiefling</option>
+            </select>
+        </div>
 
     </div>
     <div class="modal-footer">

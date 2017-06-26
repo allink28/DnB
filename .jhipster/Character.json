@@ -82,6 +82,12 @@
         {
             "fieldName": "background",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "race",
+            "fieldType": "Race",
+            "fieldValues": "Dragonborn,Dwarf,Elf,Gnome,Half_Elf,Half_Orc,Halfling,Human,Tiefling",
+            "fieldValidateRules": []
         }
     ],
     "changelogDate": "20170626000000",

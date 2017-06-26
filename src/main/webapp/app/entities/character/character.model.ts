@@ -17,6 +17,18 @@ const enum Alignment {
     'chaotic_evil'
 }
 
+const enum Race {
+    'Dragonborn',
+    'Dwarf',
+    'Elf',
+    'Gnome',
+    'Half_Elf',
+    'Half_Orc',
+    'Halfling',
+    'Human',
+    'Tiefling'
+}
+
 export class Character implements BaseEntity {
     constructor(
         public id?: number,
@@ -36,6 +48,7 @@ export class Character implements BaseEntity {
         public charisma?: number,
         public alignment?: Alignment,
         public background?: string,
+        public race?: Race,
         public spells?: BaseEntity[],
     ) {
     }
