@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -39,6 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = DnBApp.class)
 public class CharacterResourceIntTest {
 
+    private final Logger log = LoggerFactory.getLogger(CharacterResourceIntTest.class);
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -51,8 +55,8 @@ public class CharacterResourceIntTest {
     private static final String DEFAULT_CLASSES = "AAAAAAAAAA";
     private static final String UPDATED_CLASSES = "BBBBBBBBBB";
 
-    private static final Sex DEFAULT_SEX = Sex.male;
-    private static final Sex UPDATED_SEX = Sex.female;
+    private static final Sex DEFAULT_SEX = Sex.Male;
+    private static final Sex UPDATED_SEX = Sex.Female;
 
     private static final String DEFAULT_HEIGHT = "AAAAAAAAAA";
     private static final String UPDATED_HEIGHT = "BBBBBBBBBB";
@@ -81,8 +85,8 @@ public class CharacterResourceIntTest {
     private static final Integer DEFAULT_CHARISMA = 1;
     private static final Integer UPDATED_CHARISMA = 2;
 
-    private static final Alignment DEFAULT_ALIGNMENT = Alignment.lawful_good;
-    private static final Alignment UPDATED_ALIGNMENT = Alignment.neutral_good;
+    private static final Alignment DEFAULT_ALIGNMENT = Alignment.Lawful_Good;
+    private static final Alignment UPDATED_ALIGNMENT = Alignment.Neutral_Good;
 
     private static final String DEFAULT_BACKGROUND = "AAAAAAAAAA";
     private static final String UPDATED_BACKGROUND = "BBBBBBBBBB";
@@ -191,6 +195,45 @@ public class CharacterResourceIntTest {
         assertThat(testCharacter.getAlignment()).isEqualTo(DEFAULT_ALIGNMENT);
         assertThat(testCharacter.getBackground()).isEqualTo(DEFAULT_BACKGROUND);
         assertThat(testCharacter.getRace()).isEqualTo(DEFAULT_RACE);
+
+        // Validate the Character in Elasticsearch
+        Character characterEs = characterSearchRepository.findOne(testCharacter.getId());
+        assertThat(characterEs).isEqualToComparingFieldByField(testCharacter);
+    }
+
+    @Test
+    @Transactional
+    public void generateCharacter() throws Exception {
+        log.info("GenerateCharacter Test");
+        int databaseSizeBeforeCreate = characterRepository.findAll().size();
+
+        // Create the Character
+        restCharacterMockMvc.perform(post("/api/characters/generate")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(DEFAULT_NAME)))
+            .andExpect(status().isCreated());
+
+        // Validate the Character in the database
+        List<Character> characterList = characterRepository.findAll();
+        assertThat(characterList).hasSize(databaseSizeBeforeCreate + 1);
+        Character testCharacter = characterList.get(characterList.size() - 1);
+        assertThat(testCharacter.getName()).isEqualTo(DEFAULT_NAME);
+//        assertThat(testCharacter.getExp()).isEqualTo(DEFAULT_EXP);
+//        assertThat(testCharacter.getLevel()).isEqualTo(DEFAULT_LEVEL);
+//        assertThat(testCharacter.getClasses()).isEqualTo(DEFAULT_CLASSES);
+//        assertThat(testCharacter.getSex()).isEqualTo(DEFAULT_SEX);
+//        assertThat(testCharacter.getHeight()).isEqualTo(DEFAULT_HEIGHT);
+//        assertThat(testCharacter.getWeight()).isEqualTo(DEFAULT_WEIGHT);
+//        assertThat(testCharacter.getMaxHP()).isEqualTo(DEFAULT_MAX_HP);
+//        assertThat(testCharacter.getCurrentHP()).isEqualTo(DEFAULT_CURRENT_HP);
+//        assertThat(testCharacter.getStrength()).isEqualTo(DEFAULT_STRENGTH);
+//        assertThat(testCharacter.getDexterity()).isEqualTo(DEFAULT_DEXTERITY);
+//        assertThat(testCharacter.getWisdom()).isEqualTo(DEFAULT_WISDOM);
+//        assertThat(testCharacter.getIntelligence()).isEqualTo(DEFAULT_INTELLIGENCE);
+//        assertThat(testCharacter.getCharisma()).isEqualTo(DEFAULT_CHARISMA);
+//        assertThat(testCharacter.getAlignment()).isEqualTo(DEFAULT_ALIGNMENT);
+//        assertThat(testCharacter.getBackground()).isEqualTo(DEFAULT_BACKGROUND);
+//        assertThat(testCharacter.getRace()).isEqualTo(DEFAULT_RACE);
 
         // Validate the Character in Elasticsearch
         Character characterEs = characterSearchRepository.findOne(testCharacter.getId());

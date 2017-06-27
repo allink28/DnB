@@ -141,3 +141,4 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+!/src/main/java/allink28/dnb/web/rest/CharacterResource.java

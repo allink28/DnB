@@ -1,12 +1,13 @@
 package allink28.dnb.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import allink28.dnb.domain.Character;
+import allink28.dnb.service.CharacterGeneratorService;
 import allink28.dnb.service.CharacterService;
 import allink28.dnb.web.rest.util.HeaderUtil;
 import allink28.dnb.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,12 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Character.
@@ -61,6 +58,27 @@ public class CharacterResource {
         return ResponseEntity.created(new URI("/api/characters/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/characters/generate")
+    @Timed
+    public ResponseEntity<Character> generateCharacter(@RequestBody(required = false) String name) throws URISyntaxException {
+        log.debug("REST request to generate random character with name: " + name);
+        Character character = new Character();
+        if (name == null || name.isEmpty() || name.equals("{}")) {
+            character.setName(CharacterGeneratorService.generateName());
+        } else {
+            character.setName(name);
+        }
+        character.setClasses(CharacterGeneratorService.randomClass());
+        character.setRace(CharacterGeneratorService.randomRace());
+        character.setSex(CharacterGeneratorService.randomSex());
+
+        character = characterService.save(character);
+
+        return ResponseEntity.created(new URI("/api/characters/" + character.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, character.getId().toString()))
+            .body(character);
     }
 
     /**
