@@ -41,7 +41,7 @@ public class Character implements Serializable {
     @NotNull
     @Min(value = 0)
     @Column(name = "jhi_level", nullable = false)
-    private Integer level;
+    private Integer level = 0;
 
     @Column(name = "classes")
     private String classes;
