@@ -1,5 +1,6 @@
 package allink28.dnb.service;
 
+import allink28.dnb.domain.enumeration.Classes;
 import allink28.dnb.domain.enumeration.Race;
 
 import java.util.Random;
@@ -30,5 +31,10 @@ public class CharacterGeneratorService {
     public static Race randomRace() {
         Race[] races = Race.values();
         return races[rand.nextInt(races.length)];
+    }
+
+    public static String randomClass() {
+        Classes[] classes = Classes.values();
+        return classes[rand.nextInt(classes.length)].toString();
     }
 }

@@ -38,4 +38,16 @@ public class CharacterGeneratorServiceTest {
         }
         log.info(logOutput.toString());
     }
+
+    @Test
+    public void randomClassTest() {
+        StringBuilder logOutput = new StringBuilder("\n");
+        for (int i = 0; i < 20; ++i) {
+            String aClass = CharacterGeneratorService.randomClass();
+            assertTrue("Class: " + aClass + " is not correct.",
+                !aClass.isEmpty() && Character.isUpperCase(aClass.charAt(0)));
+            logOutput.append(aClass).append(" ");
+        }
+        log.info(logOutput.toString());
+    }
 }
