@@ -73,6 +73,7 @@ public class CharacterResource {
         character.setClasses(CharacterGeneratorService.randomClass());
         character.setRace(CharacterGeneratorService.randomRace());
         character.setSex(CharacterGeneratorService.randomSex());
+        character.setAlignment(CharacterGeneratorService.randomAlignment());
 
         character = characterService.save(character);
 

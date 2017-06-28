@@ -1,5 +1,6 @@
 package allink28.dnb.service;
 
+import allink28.dnb.domain.enumeration.Alignment;
 import allink28.dnb.domain.enumeration.Classes;
 import allink28.dnb.domain.enumeration.Race;
 import allink28.dnb.domain.enumeration.Sex;
@@ -43,4 +44,16 @@ public class CharacterGeneratorService {
         Sex[] sexes = Sex.values();
         return sexes[rand.nextInt(sexes.length)];
     }
+
+    public static Alignment randomAlignment() {
+        return Alignment.ALIGNMENTS[rand.nextInt(Alignment.ALIGNMENTS.length)];
+    }
+
+    /*
+     * Possible TODO: Random alignment based on Character's class and race.
+     * E.g., Paladins more likely to be lawful.
+     */
+//    public static Alignment randomAlignment(Character character) {
+//
+//    }
 }
