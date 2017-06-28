@@ -24,28 +24,18 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_exp">Exp</label>
-            <input type="number" class="form-control" name="exp" id="field_exp"
-                [(ngModel)]="character.exp"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" for="field_level">Level</label>
-            <input type="number" class="form-control" name="level" id="field_level"
-                [(ngModel)]="character.level" required min="0" />
-            <div [hidden]="!(editForm.controls.level?.dirty && editForm.controls.level?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.level?.errors?.required">
-                   This field is required.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.level?.errors?.min">
-                    This field should be at least 0.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.level?.errors?.number">
-                    This field should be a number.
-                </small>
-            </div>
+            <label class="form-control-label" for="field_race">Race</label>
+            <select class="form-control" name="race" [(ngModel)]="character.race" id="field_race" >
+                <option value="Dragonborn">Dragonborn</option>
+                <option value="Dwarf">Dwarf</option>
+                <option value="Elf">Elf</option>
+                <option value="Gnome">Gnome</option>
+                <option value="Half_Elf">Half_Elf</option>
+                <option value="Half_Orc">Half_Orc</option>
+                <option value="Halfling">Halfling</option>
+                <option value="Human">Human</option>
+                <option value="Tiefling">Tiefling</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_classes">Classes</label>
@@ -55,8 +45,23 @@
         <div class="form-group">
             <label class="form-control-label" for="field_sex">Sex</label>
             <select class="form-control" name="sex" [(ngModel)]="character.sex" id="field_sex" >
-                <option value="male">male</option>
-                <option value="female">female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_alignment">Alignment</label>
+            <select class="form-control" name="alignment" [(ngModel)]="character.alignment" id="field_alignment" >
+                <option value="Lawful_Good">Lawful_Good</option>
+                <option value="Neutral_Good">Neutral_Good</option>
+                <option value="Chaotic_Good">Chaotic_Good</option>
+                <option value="Lawful_Neutral">Lawful_Neutral</option>
+                <option value="True_Neutral">True_Neutral</option>
+                <option value="Chaotic_Neutral">Chaotic_Neutral</option>
+                <option value="Lawful_Evil">Lawful_Evil</option>
+                <option value="Neutral_Evil">Neutral_Evil</option>
+                <option value="Chaotic_Evil">Chaotic_Evil</option>
+                <option value="Unaligned">Unaligned</option>
             </select>
         </div>
         <div class="form-group">
@@ -105,37 +110,33 @@
                 [(ngModel)]="character.charisma"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_alignment">Alignment</label>
-            <select class="form-control" name="alignment" [(ngModel)]="character.alignment" id="field_alignment" >
-                <option value="lawful_good">lawful_good</option>
-                <option value="neutral_good">neutral_good</option>
-                <option value="chaotic_good">chaotic_good</option>
-                <option value="lawful_neutral">lawful_neutral</option>
-                <option value="true_neutral">true_neutral</option>
-                <option value="chaotic_neutral">chaotic_neutral</option>
-                <option value="lawful_evil">lawful_evil</option>
-                <option value="neutral_evil">neutral_evil</option>
-                <option value="chaotic_evil">chaotic_evil</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" for="field_background">Background</label>
             <input type="text" class="form-control" name="background" id="field_background"
                 [(ngModel)]="character.background"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_race">Race</label>
-            <select class="form-control" name="race" [(ngModel)]="character.race" id="field_race" >
-                <option value="Dragonborn">Dragonborn</option>
-                <option value="Dwarf">Dwarf</option>
-                <option value="Elf">Elf</option>
-                <option value="Gnome">Gnome</option>
-                <option value="Half_Elf">Half_Elf</option>
-                <option value="Half_Orc">Half_Orc</option>
-                <option value="Halfling">Halfling</option>
-                <option value="Human">Human</option>
-                <option value="Tiefling">Tiefling</option>
-            </select>
+            <label class="form-control-label" for="field_exp">Exp</label>
+            <input type="number" class="form-control" name="exp" id="field_exp"
+                [(ngModel)]="character.exp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_level">Level</label>
+            <input type="number" class="form-control" name="level" id="field_level"
+                [(ngModel)]="character.level" required min="0" />
+            <div [hidden]="!(editForm.controls.level?.dirty && editForm.controls.level?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.level?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.level?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.level?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
         </div>
 
     </div>

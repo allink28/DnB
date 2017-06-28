@@ -1,22 +1,5 @@
 import { BaseEntity } from './../../shared';
 
-const enum Sex {
-    'male',
-    'female'
-}
-
-const enum Alignment {
-    'lawful_good',
-    'neutral_good',
-    'chaotic_good',
-    'lawful_neutral',
-    'true_neutral',
-    'chaotic_neutral',
-    'lawful_evil',
-    'neutral_evil',
-    'chaotic_evil'
-}
-
 const enum Race {
     'Dragonborn',
     'Dwarf',
@@ -29,14 +12,32 @@ const enum Race {
     'Tiefling'
 }
 
+const enum Sex {
+    'Male',
+    'Female'
+}
+
+const enum Alignment {
+    'Lawful_Good',
+    'Neutral_Good',
+    'Chaotic_Good',
+    'Lawful_Neutral',
+    'True_Neutral',
+    'Chaotic_Neutral',
+    'Lawful_Evil',
+    'Neutral_Evil',
+    'Chaotic_Evil',
+    'Unaligned'
+}
+
 export class Character implements BaseEntity {
     constructor(
         public id?: number,
         public name?: string,
-        public exp?: number,
-        public level?: number,
+        public race?: Race,
         public classes?: string,
         public sex?: Sex,
+        public alignment?: Alignment,
         public height?: string,
         public weight?: number,
         public maxHP?: number,
@@ -46,9 +47,9 @@ export class Character implements BaseEntity {
         public wisdom?: number,
         public intelligence?: number,
         public charisma?: number,
-        public alignment?: Alignment,
         public background?: string,
-        public race?: Race,
+        public exp?: number,
+        public level?: number,
         public spells?: BaseEntity[],
     ) {
     }

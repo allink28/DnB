@@ -35,13 +35,9 @@ public class Character implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "exp")
-    private Long exp;
-
-    @NotNull
-    @Min(value = 0)
-    @Column(name = "jhi_level", nullable = false)
-    private Integer level = 0;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "race")
+    private Race race;
 
     @Column(name = "classes")
     private String classes;
@@ -49,6 +45,10 @@ public class Character implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "sex")
     private Sex sex;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "alignment")
+    private Alignment alignment;
 
     @Column(name = "height")
     private String height;
@@ -77,16 +77,16 @@ public class Character implements Serializable {
     @Column(name = "charisma")
     private Integer charisma;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "alignment")
-    private Alignment alignment;
-
     @Column(name = "background")
     private String background;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "race")
-    private Race race;
+    @Column(name = "exp")
+    private Long exp;
+
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "jhi_level", nullable = false)
+    private Integer level;
 
     @OneToMany(mappedBy = "character")
     @JsonIgnore
@@ -114,30 +114,17 @@ public class Character implements Serializable {
         this.name = name;
     }
 
-    public Long getExp() {
-        return exp;
+    public Race getRace() {
+        return race;
     }
 
-    public Character exp(Long exp) {
-        this.exp = exp;
+    public Character race(Race race) {
+        this.race = race;
         return this;
     }
 
-    public void setExp(Long exp) {
-        this.exp = exp;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public Character level(Integer level) {
-        this.level = level;
-        return this;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setRace(Race race) {
+        this.race = race;
     }
 
     public String getClasses() {
@@ -164,6 +151,19 @@ public class Character implements Serializable {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public Alignment getAlignment() {
+        return alignment;
+    }
+
+    public Character alignment(Alignment alignment) {
+        this.alignment = alignment;
+        return this;
+    }
+
+    public void setAlignment(Alignment alignment) {
+        this.alignment = alignment;
     }
 
     public String getHeight() {
@@ -283,19 +283,6 @@ public class Character implements Serializable {
         this.charisma = charisma;
     }
 
-    public Alignment getAlignment() {
-        return alignment;
-    }
-
-    public Character alignment(Alignment alignment) {
-        this.alignment = alignment;
-        return this;
-    }
-
-    public void setAlignment(Alignment alignment) {
-        this.alignment = alignment;
-    }
-
     public String getBackground() {
         return background;
     }
@@ -309,17 +296,30 @@ public class Character implements Serializable {
         this.background = background;
     }
 
-    public Race getRace() {
-        return race;
+    public Long getExp() {
+        return exp;
     }
 
-    public Character race(Race race) {
-        this.race = race;
+    public Character exp(Long exp) {
+        this.exp = exp;
         return this;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setExp(Long exp) {
+        this.exp = exp;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public Character level(Integer level) {
+        this.level = level;
+        return this;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Set<Spell> getSpells() {
@@ -372,10 +372,10 @@ public class Character implements Serializable {
         return "Character{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", exp='" + getExp() + "'" +
-            ", level='" + getLevel() + "'" +
+            ", race='" + getRace() + "'" +
             ", classes='" + getClasses() + "'" +
             ", sex='" + getSex() + "'" +
+            ", alignment='" + getAlignment() + "'" +
             ", height='" + getHeight() + "'" +
             ", weight='" + getWeight() + "'" +
             ", maxHP='" + getMaxHP() + "'" +
@@ -385,9 +385,9 @@ public class Character implements Serializable {
             ", wisdom='" + getWisdom() + "'" +
             ", intelligence='" + getIntelligence() + "'" +
             ", charisma='" + getCharisma() + "'" +
-            ", alignment='" + getAlignment() + "'" +
             ", background='" + getBackground() + "'" +
-            ", race='" + getRace() + "'" +
+            ", exp='" + getExp() + "'" +
+            ", level='" + getLevel() + "'" +
             "}";
     }
 }

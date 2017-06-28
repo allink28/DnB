@@ -24,12 +24,8 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="exp" type="bigint">
+            <column name="race" type="varchar(255)">
                 <constraints nullable="true" />
-            </column>
-
-            <column name="jhi_level" type="integer">
-                <constraints nullable="false" />
             </column>
 
             <column name="classes" type="varchar(255)">
@@ -37,6 +33,10 @@
             </column>
 
             <column name="sex" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="alignment" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -76,16 +76,16 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="alignment" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="background" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="race" type="varchar(255)">
+            <column name="exp" type="bigint">
                 <constraints nullable="true" />
+            </column>
+
+            <column name="jhi_level" type="integer">
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

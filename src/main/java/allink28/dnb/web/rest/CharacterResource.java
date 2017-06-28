@@ -70,6 +70,7 @@ public class CharacterResource {
         } else {
             character.setName(name);
         }
+        character.setLevel(0);
         character.setClasses(CharacterGeneratorService.randomClass());
         character.setRace(CharacterGeneratorService.randomRace());
         character.setSex(CharacterGeneratorService.randomSex());
