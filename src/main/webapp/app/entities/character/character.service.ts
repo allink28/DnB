@@ -20,6 +20,19 @@ export class CharacterService {
         });
     }
 
+    generate(character: Character): Observable<Character> {
+        const copy = this.convert(character);
+        return this.http.post(this.resourceUrl + '/generate', copy).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+//    generate(name: String): Observable<String> {
+//        return this.http.post(this.resourceUrl + '/generate', name).map((res: Response) => {
+//            return res.json();
+//        });
+//    }
+
     update(character: Character): Observable<Character> {
         const copy = this.convert(character);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {

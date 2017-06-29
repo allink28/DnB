@@ -7,6 +7,7 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { CharacterComponent } from './character.component';
 import { CharacterDetailComponent } from './character-detail.component';
 import { CharacterPopupComponent } from './character-dialog.component';
+import { CharacterGenPopupComponent } from './character-gen-dialog.component';
 import { CharacterDeletePopupComponent } from './character-delete-dialog.component';
 
 import { Principal } from '../../shared';
@@ -54,6 +55,16 @@ export const characterPopupRoute: Routes = [
     {
         path: 'character-new',
         component: CharacterPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'Characters'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'character-generate',
+        component: CharacterGenPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'Characters'

@@ -1,0 +1,155 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCharacterLabel">Generate a Character</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!character.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="character.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                   [(ngModel)]="character.name" />
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_race">Race</label>-->
+            <!--<select class="form-control" name="race" [(ngModel)]="character.race" id="field_race" >-->
+                <!--<option value="Dragonborn">Dragonborn</option>-->
+                <!--<option value="Dwarf">Dwarf</option>-->
+                <!--<option value="Elf">Elf</option>-->
+                <!--<option value="Gnome">Gnome</option>-->
+                <!--<option value="Half_Elf">Half_Elf</option>-->
+                <!--<option value="Half_Orc">Half_Orc</option>-->
+                <!--<option value="Halfling">Halfling</option>-->
+                <!--<option value="Human">Human</option>-->
+                <!--<option value="Tiefling">Tiefling</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_classes">Classes</label>-->
+            <!--<input type="text" class="form-control" name="classes" id="field_classes"-->
+                   <!--[(ngModel)]="character.classes"  />-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_sex">Sex</label>-->
+            <!--<select class="form-control" name="sex" [(ngModel)]="character.sex" id="field_sex" >-->
+                <!--<option value="Male">Male</option>-->
+                <!--<option value="Female">Female</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_alignment">Alignment</label>-->
+            <!--<select class="form-control" name="alignment" [(ngModel)]="character.alignment" id="field_alignment" >-->
+                <!--<option value="Lawful_Good">Lawful_Good</option>-->
+                <!--<option value="Neutral_Good">Neutral_Good</option>-->
+                <!--<option value="Chaotic_Good">Chaotic_Good</option>-->
+                <!--<option value="Lawful_Neutral">Lawful_Neutral</option>-->
+                <!--<option value="True_Neutral">True_Neutral</option>-->
+                <!--<option value="Chaotic_Neutral">Chaotic_Neutral</option>-->
+                <!--<option value="Lawful_Evil">Lawful_Evil</option>-->
+                <!--<option value="Neutral_Evil">Neutral_Evil</option>-->
+                <!--<option value="Chaotic_Evil">Chaotic_Evil</option>-->
+                <!--<option value="Unaligned">Unaligned</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_height">Height</label>-->
+            <!--<input type="text" class="form-control" name="height" id="field_height"-->
+                   <!--[(ngModel)]="character.height"  />-->
+        <!--</div>-->
+        <!---->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_weight">Weight</label>-->
+            <!--<input type="number" class="form-control" name="weight" id="field_weight"-->
+                   <!--[(ngModel)]="character.weight"  />-->
+        <!--</div>-->
+        <!---->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_maxHP">Max HP</label>-->
+            <!--<input type="number" class="form-control" name="maxHP" id="field_maxHP"-->
+                   <!--[(ngModel)]="character.maxHP"  />-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+        <!--<label class="form-control-label" for="field_currentHP">Current HP</label>-->
+        <!--<input type="number" class="form-control" name="currentHP" id="field_currentHP"-->
+        <!--[(ngModel)]="character.currentHP"  />-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_strength">Strength</label>-->
+            <!--<input type="number" class="form-control" name="strength" id="field_strength"-->
+                   <!--[(ngModel)]="character.strength"  />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_dexterity">Dexterity</label>-->
+            <!--<input type="number" class="form-control" name="dexterity" id="field_dexterity"-->
+                   <!--[(ngModel)]="character.dexterity"  />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_wisdom">Wisdom</label>-->
+            <!--<input type="number" class="form-control" name="wisdom" id="field_wisdom"-->
+                   <!--[(ngModel)]="character.wisdom"  />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_intelligence">Intelligence</label>-->
+            <!--<input type="number" class="form-control" name="intelligence" id="field_intelligence"-->
+                   <!--[(ngModel)]="character.intelligence"  />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_charisma">Charisma</label>-->
+            <!--<input type="number" class="form-control" name="charisma" id="field_charisma"-->
+                   <!--[(ngModel)]="character.charisma"  />-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_background">Background</label>-->
+            <!--<input type="text" class="form-control" name="background" id="field_background"-->
+                   <!--[(ngModel)]="character.background"  />-->
+        <!--</div>-->
+        <!---->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_exp">Exp</label>-->
+            <!--<input type="number" class="form-control" name="exp" id="field_exp"-->
+                   <!--[(ngModel)]="character.exp"  />-->
+        <!--</div>-->
+        <div class="form-group">
+            <label class="form-control-label" for="field_level">Level</label>
+            <input type="number" class="form-control" name="level" id="field_level"
+                   [(ngModel)]="character.level" required min="0" />
+            <div [hidden]="!(editForm.controls.level?.dirty && editForm.controls.level?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.level?.errors?.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.level?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.level?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
