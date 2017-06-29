@@ -62,7 +62,7 @@ public class CharacterResource {
 
     @PostMapping("/characters/generate")
     @Timed
-    public ResponseEntity<Character> generateCharacter(@Valid @RequestBody Character character) throws URISyntaxException {
+    public ResponseEntity<Character> generateCharacter(@RequestBody Character character) throws URISyntaxException {
         log.debug("REST request to generate random character: " + character);
         if (character == null) {
             character = new Character();
