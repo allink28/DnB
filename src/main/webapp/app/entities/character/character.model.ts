@@ -52,6 +52,5 @@ export class Character implements BaseEntity {
         public level?: number,
         public spells?: BaseEntity[],
     ) {
-        level = 0;
     }
 }
