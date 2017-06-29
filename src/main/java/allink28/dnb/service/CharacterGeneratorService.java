@@ -1,9 +1,12 @@
 package allink28.dnb.service;
 
+import allink28.dnb.domain.Character;
 import allink28.dnb.domain.enumeration.Alignment;
 import allink28.dnb.domain.enumeration.Classes;
 import allink28.dnb.domain.enumeration.Race;
 import allink28.dnb.domain.enumeration.Sex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
@@ -11,6 +14,9 @@ import java.util.Random;
  * Created by allenpreville on 6/25/17.
  */
 public class CharacterGeneratorService {
+
+    private static final Logger log = LoggerFactory.getLogger(CharacterGeneratorService.class);
+
     private static final String[] PREFIX = {"A", "Al", "B", "Br", "C", "Ch", "D",
         "F", "G", "H", "I", "J", "K", "Kn", "L", "M", "N", "P", "Qu", "R", "S",
         "St", "T", "Tr", "Th", "V", "W", "X", "Y", "Z"};
@@ -51,9 +57,84 @@ public class CharacterGeneratorService {
 
     /*
      * Possible TODO: Random alignment based on Character's class and race.
-     * E.g., Paladins more likely to be lawful.
+     * E.g., Paladins more likely to be lawful. Half-elves more likely to be chaotic.
      */
-//    public static Alignment randomAlignment(Character character) {
+    public static Alignment randomAlignment(Character character) {
+        String characterClass = character.getClasses();
+        Race race = character.getRace();
+        try {
+            Classes thisClass = Classes.valueOf(characterClass);
+            switch (thisClass) {
+                case Paladin:
+
+                    break;
+                case Cleric:
+
+                    break;
+
+            }
+        } catch (IllegalArgumentException e) {
+            log.error("Unable to parse class: " + characterClass + ". " + e.getMessage() + " Disregarding class for alignment random alignment.");
+//            return randomAlignment();
+        }
+
+        switch (race) {
+            case Half_Elf:
+
+                break;
+            case Tiefling:
+
+                break;
+            case Gnome:
+
+                break;
+
+            default:
+                return randomAlignment();
+        }
+
+        return randomAlignment();
+    }
+
+//    /**
+//     * Generate a random character height based on race and sex.
+//     */
+//    public static String randomHeight(Character character) {
 //
 //    }
+
+//    /**
+//     * Generate a random character weight based on height?
+//     */
+//    public static String randomWeight(Character character) {
+//
+//    }
+
+
+    /**
+     * Bounded bell curve.
+     * Approximates a bell curve by adding and subtracting
+     */
+    public static int plusMinusRandomBellCurve(int midpoint, int distToMax) {
+        return midpoint + rand.nextInt(distToMax) - rand.nextInt(distToMax);
+    }
+
+    /**
+     * Bounded bell curve.
+     * Approximates a bell curve by
+     */
+    public static int boundedRandomBellcurve(int midpoint, int distToMax) {
+        //Start at lowerbound
+        return midpoint - distToMax +
+            //and then add the average of two random numbers
+            (int) Math.round((2*distToMax * rand.nextDouble() + 2*distToMax * rand.nextDouble())/2.0);
+    }
+
+    /**
+     * Bellcurve that is theoretically unbounded.
+     */
+    public static int gaussianRandom(int midpoint, int distToMax) {
+        double gaussian = rand.nextGaussian();
+        return (int)(midpoint + (gaussian * distToMax));
+    }
 }

@@ -50,4 +50,62 @@ public class CharacterGeneratorServiceTest {
         }
         log.info(logOutput.toString());
     }
+
+    public void plusMinusRandomDistributionTest() {
+        long sum = 0;
+        int[] distribution = new int[121];
+
+        for (int i = 0; i < 1000; ++i) {
+            int randomNumber = CharacterGeneratorService.plusMinusRandomBellCurve(100, 20);
+            sum += randomNumber;
+            ++distribution[randomNumber];
+        }
+        log.info("Sum: " + sum + " Average: " + (sum/(double)1000));
+        for (int i = 80; i < distribution.length; ++i) {
+            String output = "i=" + i + " \tHits: " + distribution[i] + " \t";
+            for (int j = 0; j < distribution[i]/2; ++j) {
+                output += "+";
+            }
+            log.info(output);
+        }
+    }
+
+    public void averageOfTwoRandomDistributionTest() {
+        long sum = 0;
+        int[] distribution = new int[121];
+
+        double repeatedTrials = 10000;
+        for (int i = 0; i < repeatedTrials; ++i) {
+            int randomNumber = CharacterGeneratorService.boundedRandomBellcurve(100, 20);
+            sum += randomNumber;
+            ++distribution[randomNumber];
+        }
+        log.info("Sum: " + sum + " Average: " + (sum/repeatedTrials));
+        for (int i = 80; i < distribution.length; ++i) {
+            String output = "i=" + i + " \tHits: " + distribution[i] + " \t";
+            for (int j = 0; j < distribution[i]/10; ++j) {
+                output += "+";
+            }
+            log.info(output);
+        }
+    }
+
+    public void gaussianRandomDistributionTest2() {
+        long sum = 0;
+        int[] distribution = new int[201];
+
+        for (int i = 0; i < 1000; ++i) {
+            int randomNumber = CharacterGeneratorService.gaussianRandom(100, 20);
+            sum += randomNumber;
+            ++distribution[randomNumber];
+        }
+        log.info("Sum: " + sum + " Average: " + (sum/(double)1000));
+        for (int i = 40; i < distribution.length; ++i) {
+            String output = "i=" + i + " \tHits: " + distribution[i] + " \t";
+            for (int j = 0; j < distribution[i]/2; ++j) {
+                output += "+";
+            }
+            log.info(output);
+        }
+    }
 }
