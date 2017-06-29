@@ -7,6 +7,11 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label>These fields are all optional and will be randomly generated for you if left blank.</label>
+            <!--<input type="text" class="form-control" id="explanation" name="id"-->
+                   <!--[(ngModel)]="character.id" readonly />-->
+        </div>
         <div class="form-group" [hidden]="!character.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
@@ -123,25 +128,25 @@
             <!--<input type="number" class="form-control" name="exp" id="field_exp"-->
                    <!--[(ngModel)]="character.exp"  />-->
         <!--</div>-->
-        <div class="form-group">
-            <label class="form-control-label" for="field_level">Level</label>
-            <input type="number" class="form-control" name="level" id="field_level"
-                   [(ngModel)]="character.level" required min="0" />
-            <div [hidden]="!(editForm.controls.level?.dirty && editForm.controls.level?.invalid)">
-                <small class="form-text text-danger"
-                       [hidden]="!editForm.controls.level?.errors?.required">
-                    This field is required.
-                </small>
-                <small class="form-text text-danger"
-                       [hidden]="!editForm.controls.level?.errors?.min">
-                    This field should be at least 0.
-                </small>
-                <small class="form-text text-danger"
-                       [hidden]="!editForm.controls.level?.errors?.number">
-                    This field should be a number.
-                </small>
-            </div>
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_level">Level</label>-->
+            <!--<input type="number" class="form-control" name="level" id="field_level"-->
+                   <!--[(ngModel)]="character.level" required min="0" />-->
+            <!--<div [hidden]="!(editForm.controls.level?.dirty && editForm.controls.level?.invalid)">-->
+                <!--<small class="form-text text-danger"-->
+                       <!--[hidden]="!editForm.controls.level?.errors?.required">-->
+                    <!--This field is required.-->
+                <!--</small>-->
+                <!--<small class="form-text text-danger"-->
+                       <!--[hidden]="!editForm.controls.level?.errors?.min">-->
+                    <!--This field should be at least 0.-->
+                <!--</small>-->
+                <!--<small class="form-text text-danger"-->
+                       <!--[hidden]="!editForm.controls.level?.errors?.number">-->
+                    <!--This field should be a number.-->
+                <!--</small>-->
+            <!--</div>-->
+        <!--</div>-->
 
     </div>
     <div class="modal-footer">
