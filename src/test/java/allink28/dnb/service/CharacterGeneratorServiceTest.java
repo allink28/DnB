@@ -1,5 +1,8 @@
 package allink28.dnb.service;
 
+import allink28.dnb.domain.Character;
+import allink28.dnb.domain.enumeration.Race;
+import allink28.dnb.domain.enumeration.Sex;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +24,7 @@ public class CharacterGeneratorServiceTest {
         for (int i = 0; i < 50; ++i) {
             String name = CharacterGeneratorService.generateName();
             assertTrue("Name: " + name + " is not correct.",
-                !name.isEmpty() && Character.isUpperCase(name.charAt(0)));
+                !name.isEmpty() && java.lang.Character.isUpperCase(name.charAt(0)));
             logOutput.append(name).append(" ");
         }
         log.info(logOutput.toString());
@@ -33,7 +36,7 @@ public class CharacterGeneratorServiceTest {
         for (int i = 0; i < 20; ++i) {
             String race = CharacterGeneratorService.randomRace().toString();
             assertTrue("Race: " + race + " is not correct.",
-                !race.isEmpty() && Character.isUpperCase(race.charAt(0)));
+                !race.isEmpty() && java.lang.Character.isUpperCase(race.charAt(0)));
             logOutput.append(race).append(" ");
         }
         log.info(logOutput.toString());
@@ -45,11 +48,50 @@ public class CharacterGeneratorServiceTest {
         for (int i = 0; i < 20; ++i) {
             String aClass = CharacterGeneratorService.randomClass();
             assertTrue("Class: " + aClass + " is not correct.",
-                !aClass.isEmpty() && Character.isUpperCase(aClass.charAt(0)));
+                !aClass.isEmpty() && java.lang.Character.isUpperCase(aClass.charAt(0)));
             logOutput.append(aClass).append(" ");
         }
         log.info(logOutput.toString());
     }
+
+    @Test
+    public void randomHeightTest() {
+        Character character = new Character();
+        character.setRace(Race.Human);
+        character.setSex(Sex.Male);
+        for (int i = 0; i < 20; ++i) {
+            log.info("Height: " + CharacterGeneratorService.randomHeight(character));
+        }
+    }
+
+    /**
+     * Test distrubution of DnD's method of random by testing it out on height (in inches)
+     * 56 inches base + 2d10
+     */
+    @Test
+    public void dndRandomTest() {
+        long sum = 0;
+        int[] distribution = new int[77];
+
+        for (int i = 0; i < 1000; ++i) {
+            int randomNumber = CharacterGeneratorService.dndRandom(56, 10, 10);
+            sum += randomNumber;
+            ++distribution[randomNumber];
+        }
+        log.info("Sum: " + sum + " Average: " + (sum/(double)1000));
+        for (int i = 56; i < distribution.length; ++i) {
+            String output = "i=" + i + " or \t" +
+                CharacterGeneratorService.inchesToFormattedHeight(i) +
+                " \tHits: " + distribution[i] + " \t";
+            for (int j = 0; j < distribution[i]/2; ++j) {
+                output += "+";
+            }
+            log.info(output);
+        }
+    }
+
+
+    // -------------- Random distribution tests ----------------
 
     public void plusMinusRandomDistributionTest() {
         long sum = 0;

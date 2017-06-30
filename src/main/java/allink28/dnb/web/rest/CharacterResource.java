@@ -64,17 +64,24 @@ public class CharacterResource {
     @Timed
     public ResponseEntity<Character> generateCharacter(@RequestBody Character character) throws URISyntaxException {
         log.debug("REST request to generate random character: " + character);
-        if (character == null) {
+        if (character == null)
             character = new Character();
-        }
-        if (character.getName() == null || character.getName().isEmpty()) {
+
+        if (character.getName() == null || character.getName().isEmpty())
             character.setName(CharacterGeneratorService.generateName());
-        }
-        character.setLevel(0);
-        character.setClasses(CharacterGeneratorService.randomClass());
-        character.setRace(CharacterGeneratorService.randomRace());
-        character.setSex(CharacterGeneratorService.randomSex());
-        character.setAlignment(CharacterGeneratorService.randomAlignment());
+
+        if (character.getLevel() == null)
+            character.setLevel(0);
+        if (character.getSex() == null)
+            character.setSex(CharacterGeneratorService.randomSex());
+        if (character.getRace() == null)
+            character.setRace(CharacterGeneratorService.randomRace());
+        if (character.getClasses() == null || character.getClasses().isEmpty())
+            character.setClasses(CharacterGeneratorService.randomClass());
+        if (character.getAlignment() == null)
+            character.setAlignment(CharacterGeneratorService.randomAlignment(character));
+        if (character.getHeight() == null || character.getHeight().isEmpty())
+            character.setHeight(CharacterGeneratorService.randomHeight(character));
 
         character = characterService.save(character);
 
