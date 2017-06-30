@@ -93,7 +93,7 @@ public class CharacterGeneratorService {
                         return rogueAlignments[rand.nextInt(rogueAlignments.length)];
                     }
                     break;
-                case Bard: //Any non-Lawful alignment?
+                case Bard:
                     if (rand.nextInt(3) == 0) { //~33% of being not Lawful
                         Alignment[] rogueAlignments = { Alignment.Neutral_Good, Alignment.Chaotic_Good, Alignment.True_Neutral,
                             Alignment.Neutral_Evil, Alignment.Chaotic_Neutral, Alignment.Chaotic_evil
@@ -210,16 +210,81 @@ public class CharacterGeneratorService {
         return inches/12 + "'" + inches%12+"\"";
     }
 
-//    /**
-//     * Generate a random character weight based on height?
-//     */
-//    public static String randomWeight(Character character) {
-//
-//    }
+    /**
+     * Generate a random character height and weight based on race
+     */
+    public static void setRandomHeightWeight(Character character) {
+        int heightModifier;
+        Race race = character.getRace();
+
+        switch (race) {
+            case Human:
+                heightModifier = rollDie(10,10);
+                //67" average male height, 62" average female
+                if (Sex.Female == character.getSex()) {
+                    heightModifier -= rand.nextInt(6);
+                    heightModifier = Math.max(0, heightModifier);
+                }
+                character.setHeight(inchesToFormattedHeight(56 + heightModifier));
+                character.setWeight(110  + heightModifier * rollDie(4,4));
+                break;
+            case Dwarf:
+                //4' for mountain dwarf, 3'8" for hill dwarf. Todo What do?
+                heightModifier = rollDie(4,4);
+                character.setHeight(inchesToFormattedHeight(48 + heightModifier));
+                character.setWeight(130  + heightModifier * rollDie(6,6));
+                break;
+            case Elf:
+                heightModifier = rollDie(10,10);
+                character.setHeight(inchesToFormattedHeight(54 + heightModifier));
+                character.setWeight(100  + heightModifier * rollDie(4,4));//wood elf
+                break;
+            case Halfling:
+                heightModifier = rollDie(4,4);
+                character.setHeight(inchesToFormattedHeight(21 + heightModifier));
+                character.setWeight(35  + heightModifier);
+                break;
+            case Dragonborn:
+                heightModifier = rollDie(8,8);
+                character.setHeight(inchesToFormattedHeight(66 + heightModifier));
+                character.setWeight(175  + heightModifier * rollDie(6,6));
+                break;
+            case Gnome:
+                heightModifier = rollDie(4,4);
+                character.setHeight(inchesToFormattedHeight(35 + heightModifier));
+                character.setWeight(35  + heightModifier);
+                break;
+            case Half_Elf:
+                heightModifier = rollDie(8,8);
+                character.setHeight(inchesToFormattedHeight(57 + heightModifier));
+                character.setWeight(110  + heightModifier * rollDie(4,4));
+                break;
+            case Half_Orc:
+                heightModifier = rollDie(10,10);
+                character.setHeight(inchesToFormattedHeight(58 + heightModifier));
+                character.setWeight(140  + heightModifier * rollDie(6,6));
+                break;
+            case Tiefling:
+                heightModifier = rollDie(8,8);
+                character.setHeight(inchesToFormattedHeight(57 + heightModifier));
+                character.setWeight(110  + heightModifier * rollDie(4,4));
+                break;
+            default:
+                log.error("Unknown race " + race);
+        }
+    }
+
+    public static int rollDie(int... dieSides) {
+        int sum = 0;
+        for (int dieSide : dieSides) {
+            sum += rand.nextInt(dieSide) + 1;
+        }
+        return sum;
+    }
 
     public static int dndRandom(int base, int... diceModifier) {
-        for (int i = 0; i < diceModifier.length; ++i) {
-            base += rand.nextInt(diceModifier[i]) + 1;
+        for (int dieModifier : diceModifier) {
+            base += rand.nextInt(dieModifier) + 1;
         }
         return base;
     }

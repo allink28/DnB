@@ -80,8 +80,9 @@ public class CharacterResource {
             character.setClasses(CharacterGeneratorService.randomClass());
         if (character.getAlignment() == null)
             character.setAlignment(CharacterGeneratorService.randomAlignment(character));
-        if (character.getHeight() == null || character.getHeight().isEmpty())
-            character.setHeight(CharacterGeneratorService.randomHeight(character));
+        if ((character.getHeight() == null || character.getHeight().isEmpty())
+            && (character.getWeight() == null || character.getWeight() == 0))
+            CharacterGeneratorService.setRandomHeightWeight(character);
 
         character = characterService.save(character);
 
@@ -89,29 +90,6 @@ public class CharacterResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, character.getId().toString()))
             .body(character);
     }
-
-//    @PostMapping("/characters/generate")
-//    @Timed
-//    public ResponseEntity<Character> generateCharacter(@RequestBody(required = false) String name) throws URISyntaxException {
-//        log.debug("REST request to generate random character with name: " + name);
-//        Character character = new Character();
-//        if (name == null || name.isEmpty() || name.equals("{}")) {
-//            character.setName(CharacterGeneratorService.generateName());
-//        } else {
-//            character.setName(name);
-//        }
-//        character.setLevel(0);
-//        character.setClasses(CharacterGeneratorService.randomClass());
-//        character.setRace(CharacterGeneratorService.randomRace());
-//        character.setSex(CharacterGeneratorService.randomSex());
-//        character.setAlignment(CharacterGeneratorService.randomAlignment());
-//
-//        character = characterService.save(character);
-//
-//        return ResponseEntity.created(new URI("/api/characters/" + character.getId()))
-//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, character.getId().toString()))
-//            .body(character);
-//    }
 
     /**
      * PUT  /characters : Updates an existing character.
