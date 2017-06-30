@@ -21,4 +21,19 @@ public enum Alignment {
         {Lawful_Neutral,    True_Neutral,   Chaotic_Neutral},
         {Lawful_Evil,       Neutral_Evil,   Chaotic_evil}
     };
+
+    /**
+     * GRID[EVIL_ROW][x]
+     */
+    public static final int EVIL_ROW = 2;
+
+    /**
+     * GRID[x][LAWFUL_COLUMN] for the Chaotic column
+     */
+    public static final int LAWFUL_COLUMN = 0;
+
+    /**
+     * GRID[x][CHAOTIC_COLUMN] for the Chaotic column
+     */
+    public static final int CHAOTIC_COLUMN = 2;
 }
