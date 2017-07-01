@@ -68,6 +68,9 @@ public class Character implements Serializable {
     @Column(name = "dexterity")
     private Integer dexterity;
 
+    @Column(name = "constitution")
+    private Integer constitution;
+
     @Column(name = "wisdom")
     private Integer wisdom;
 
@@ -244,6 +247,19 @@ public class Character implements Serializable {
         this.dexterity = dexterity;
     }
 
+    public Integer getConstitution() {
+        return constitution;
+    }
+
+    public Character constitution(Integer constitution) {
+        this.constitution = constitution;
+        return this;
+    }
+
+    public void setConstitution(Integer constitution) {
+        this.constitution = constitution;
+    }
+
     public Integer getWisdom() {
         return wisdom;
     }
@@ -382,6 +398,7 @@ public class Character implements Serializable {
             ", currentHP='" + getCurrentHP() + "'" +
             ", strength='" + getStrength() + "'" +
             ", dexterity='" + getDexterity() + "'" +
+            ", constitution='" + getConstitution() + "'" +
             ", wisdom='" + getWisdom() + "'" +
             ", intelligence='" + getIntelligence() + "'" +
             ", charisma='" + getCharisma() + "'" +

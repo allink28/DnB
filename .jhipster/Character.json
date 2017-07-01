@@ -61,6 +61,10 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "constitution",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "wisdom",
             "fieldType": "Integer"
         },

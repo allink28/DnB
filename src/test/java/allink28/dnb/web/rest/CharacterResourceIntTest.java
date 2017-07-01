@@ -46,17 +46,17 @@ public class CharacterResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_EXP = 1L;
-    private static final Long UPDATED_EXP = 2L;
-
-    private static final Integer DEFAULT_LEVEL = 0;
-    private static final Integer UPDATED_LEVEL = 1;
+    private static final Race DEFAULT_RACE = Race.Dragonborn;
+    private static final Race UPDATED_RACE = Race.Dwarf;
 
     private static final String DEFAULT_CLASSES = "AAAAAAAAAA";
     private static final String UPDATED_CLASSES = "BBBBBBBBBB";
 
     private static final Sex DEFAULT_SEX = Sex.Male;
     private static final Sex UPDATED_SEX = Sex.Female;
+
+    private static final Alignment DEFAULT_ALIGNMENT = Alignment.Lawful_Good;
+    private static final Alignment UPDATED_ALIGNMENT = Alignment.Neutral_Good;
 
     private static final String DEFAULT_HEIGHT = "AAAAAAAAAA";
     private static final String UPDATED_HEIGHT = "BBBBBBBBBB";
@@ -76,6 +76,9 @@ public class CharacterResourceIntTest {
     private static final Integer DEFAULT_DEXTERITY = 1;
     private static final Integer UPDATED_DEXTERITY = 2;
 
+    private static final Integer DEFAULT_CONSTITUTION = 1;
+    private static final Integer UPDATED_CONSTITUTION = 2;
+
     private static final Integer DEFAULT_WISDOM = 1;
     private static final Integer UPDATED_WISDOM = 2;
 
@@ -85,14 +88,14 @@ public class CharacterResourceIntTest {
     private static final Integer DEFAULT_CHARISMA = 1;
     private static final Integer UPDATED_CHARISMA = 2;
 
-    private static final Alignment DEFAULT_ALIGNMENT = Alignment.Lawful_Good;
-    private static final Alignment UPDATED_ALIGNMENT = Alignment.Neutral_Good;
-
     private static final String DEFAULT_BACKGROUND = "AAAAAAAAAA";
     private static final String UPDATED_BACKGROUND = "BBBBBBBBBB";
 
-    private static final Race DEFAULT_RACE = Race.Dragonborn;
-    private static final Race UPDATED_RACE = Race.Dwarf;
+    private static final Long DEFAULT_EXP = 1L;
+    private static final Long UPDATED_EXP = 2L;
+
+    private static final Integer DEFAULT_LEVEL = 0;
+    private static final Integer UPDATED_LEVEL = 1;
 
     @Autowired
     private CharacterRepository characterRepository;
@@ -138,22 +141,23 @@ public class CharacterResourceIntTest {
     public static Character createEntity(EntityManager em) {
         Character character = new Character()
             .name(DEFAULT_NAME)
-            .exp(DEFAULT_EXP)
-            .level(DEFAULT_LEVEL)
+            .race(DEFAULT_RACE)
             .classes(DEFAULT_CLASSES)
             .sex(DEFAULT_SEX)
+            .alignment(DEFAULT_ALIGNMENT)
             .height(DEFAULT_HEIGHT)
             .weight(DEFAULT_WEIGHT)
             .maxHP(DEFAULT_MAX_HP)
             .currentHP(DEFAULT_CURRENT_HP)
             .strength(DEFAULT_STRENGTH)
             .dexterity(DEFAULT_DEXTERITY)
+            .constitution(DEFAULT_CONSTITUTION)
             .wisdom(DEFAULT_WISDOM)
             .intelligence(DEFAULT_INTELLIGENCE)
             .charisma(DEFAULT_CHARISMA)
-            .alignment(DEFAULT_ALIGNMENT)
             .background(DEFAULT_BACKGROUND)
-            .race(DEFAULT_RACE);
+            .exp(DEFAULT_EXP)
+            .level(DEFAULT_LEVEL);
         return character;
     }
 
@@ -179,22 +183,23 @@ public class CharacterResourceIntTest {
         assertThat(characterList).hasSize(databaseSizeBeforeCreate + 1);
         Character testCharacter = characterList.get(characterList.size() - 1);
         assertThat(testCharacter.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testCharacter.getExp()).isEqualTo(DEFAULT_EXP);
-        assertThat(testCharacter.getLevel()).isEqualTo(DEFAULT_LEVEL);
+        assertThat(testCharacter.getRace()).isEqualTo(DEFAULT_RACE);
         assertThat(testCharacter.getClasses()).isEqualTo(DEFAULT_CLASSES);
         assertThat(testCharacter.getSex()).isEqualTo(DEFAULT_SEX);
+        assertThat(testCharacter.getAlignment()).isEqualTo(DEFAULT_ALIGNMENT);
         assertThat(testCharacter.getHeight()).isEqualTo(DEFAULT_HEIGHT);
         assertThat(testCharacter.getWeight()).isEqualTo(DEFAULT_WEIGHT);
         assertThat(testCharacter.getMaxHP()).isEqualTo(DEFAULT_MAX_HP);
         assertThat(testCharacter.getCurrentHP()).isEqualTo(DEFAULT_CURRENT_HP);
         assertThat(testCharacter.getStrength()).isEqualTo(DEFAULT_STRENGTH);
         assertThat(testCharacter.getDexterity()).isEqualTo(DEFAULT_DEXTERITY);
+        assertThat(testCharacter.getConstitution()).isEqualTo(DEFAULT_CONSTITUTION);
         assertThat(testCharacter.getWisdom()).isEqualTo(DEFAULT_WISDOM);
         assertThat(testCharacter.getIntelligence()).isEqualTo(DEFAULT_INTELLIGENCE);
         assertThat(testCharacter.getCharisma()).isEqualTo(DEFAULT_CHARISMA);
-        assertThat(testCharacter.getAlignment()).isEqualTo(DEFAULT_ALIGNMENT);
         assertThat(testCharacter.getBackground()).isEqualTo(DEFAULT_BACKGROUND);
-        assertThat(testCharacter.getRace()).isEqualTo(DEFAULT_RACE);
+        assertThat(testCharacter.getExp()).isEqualTo(DEFAULT_EXP);
+        assertThat(testCharacter.getLevel()).isEqualTo(DEFAULT_LEVEL);
 
         // Validate the Character in Elasticsearch
         Character characterEs = characterSearchRepository.findOne(testCharacter.getId());
@@ -307,22 +312,23 @@ public class CharacterResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(character.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].exp").value(hasItem(DEFAULT_EXP.intValue())))
-            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)))
+            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE.toString())))
             .andExpect(jsonPath("$.[*].classes").value(hasItem(DEFAULT_CLASSES.toString())))
             .andExpect(jsonPath("$.[*].sex").value(hasItem(DEFAULT_SEX.toString())))
+            .andExpect(jsonPath("$.[*].alignment").value(hasItem(DEFAULT_ALIGNMENT.toString())))
             .andExpect(jsonPath("$.[*].height").value(hasItem(DEFAULT_HEIGHT.toString())))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT)))
             .andExpect(jsonPath("$.[*].maxHP").value(hasItem(DEFAULT_MAX_HP)))
             .andExpect(jsonPath("$.[*].currentHP").value(hasItem(DEFAULT_CURRENT_HP)))
             .andExpect(jsonPath("$.[*].strength").value(hasItem(DEFAULT_STRENGTH)))
             .andExpect(jsonPath("$.[*].dexterity").value(hasItem(DEFAULT_DEXTERITY)))
+            .andExpect(jsonPath("$.[*].constitution").value(hasItem(DEFAULT_CONSTITUTION)))
             .andExpect(jsonPath("$.[*].wisdom").value(hasItem(DEFAULT_WISDOM)))
             .andExpect(jsonPath("$.[*].intelligence").value(hasItem(DEFAULT_INTELLIGENCE)))
             .andExpect(jsonPath("$.[*].charisma").value(hasItem(DEFAULT_CHARISMA)))
-            .andExpect(jsonPath("$.[*].alignment").value(hasItem(DEFAULT_ALIGNMENT.toString())))
             .andExpect(jsonPath("$.[*].background").value(hasItem(DEFAULT_BACKGROUND.toString())))
-            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE.toString())));
+            .andExpect(jsonPath("$.[*].exp").value(hasItem(DEFAULT_EXP.intValue())))
+            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)));
     }
 
     @Test
@@ -337,22 +343,23 @@ public class CharacterResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(character.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.exp").value(DEFAULT_EXP.intValue()))
-            .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL))
+            .andExpect(jsonPath("$.race").value(DEFAULT_RACE.toString()))
             .andExpect(jsonPath("$.classes").value(DEFAULT_CLASSES.toString()))
             .andExpect(jsonPath("$.sex").value(DEFAULT_SEX.toString()))
+            .andExpect(jsonPath("$.alignment").value(DEFAULT_ALIGNMENT.toString()))
             .andExpect(jsonPath("$.height").value(DEFAULT_HEIGHT.toString()))
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT))
             .andExpect(jsonPath("$.maxHP").value(DEFAULT_MAX_HP))
             .andExpect(jsonPath("$.currentHP").value(DEFAULT_CURRENT_HP))
             .andExpect(jsonPath("$.strength").value(DEFAULT_STRENGTH))
             .andExpect(jsonPath("$.dexterity").value(DEFAULT_DEXTERITY))
+            .andExpect(jsonPath("$.constitution").value(DEFAULT_CONSTITUTION))
             .andExpect(jsonPath("$.wisdom").value(DEFAULT_WISDOM))
             .andExpect(jsonPath("$.intelligence").value(DEFAULT_INTELLIGENCE))
             .andExpect(jsonPath("$.charisma").value(DEFAULT_CHARISMA))
-            .andExpect(jsonPath("$.alignment").value(DEFAULT_ALIGNMENT.toString()))
             .andExpect(jsonPath("$.background").value(DEFAULT_BACKGROUND.toString()))
-            .andExpect(jsonPath("$.race").value(DEFAULT_RACE.toString()));
+            .andExpect(jsonPath("$.exp").value(DEFAULT_EXP.intValue()))
+            .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL));
     }
 
     @Test
@@ -375,22 +382,23 @@ public class CharacterResourceIntTest {
         Character updatedCharacter = characterRepository.findOne(character.getId());
         updatedCharacter
             .name(UPDATED_NAME)
-            .exp(UPDATED_EXP)
-            .level(UPDATED_LEVEL)
+            .race(UPDATED_RACE)
             .classes(UPDATED_CLASSES)
             .sex(UPDATED_SEX)
+            .alignment(UPDATED_ALIGNMENT)
             .height(UPDATED_HEIGHT)
             .weight(UPDATED_WEIGHT)
             .maxHP(UPDATED_MAX_HP)
             .currentHP(UPDATED_CURRENT_HP)
             .strength(UPDATED_STRENGTH)
             .dexterity(UPDATED_DEXTERITY)
+            .constitution(UPDATED_CONSTITUTION)
             .wisdom(UPDATED_WISDOM)
             .intelligence(UPDATED_INTELLIGENCE)
             .charisma(UPDATED_CHARISMA)
-            .alignment(UPDATED_ALIGNMENT)
             .background(UPDATED_BACKGROUND)
-            .race(UPDATED_RACE);
+            .exp(UPDATED_EXP)
+            .level(UPDATED_LEVEL);
 
         restCharacterMockMvc.perform(put("/api/characters")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -402,22 +410,23 @@ public class CharacterResourceIntTest {
         assertThat(characterList).hasSize(databaseSizeBeforeUpdate);
         Character testCharacter = characterList.get(characterList.size() - 1);
         assertThat(testCharacter.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testCharacter.getExp()).isEqualTo(UPDATED_EXP);
-        assertThat(testCharacter.getLevel()).isEqualTo(UPDATED_LEVEL);
+        assertThat(testCharacter.getRace()).isEqualTo(UPDATED_RACE);
         assertThat(testCharacter.getClasses()).isEqualTo(UPDATED_CLASSES);
         assertThat(testCharacter.getSex()).isEqualTo(UPDATED_SEX);
+        assertThat(testCharacter.getAlignment()).isEqualTo(UPDATED_ALIGNMENT);
         assertThat(testCharacter.getHeight()).isEqualTo(UPDATED_HEIGHT);
         assertThat(testCharacter.getWeight()).isEqualTo(UPDATED_WEIGHT);
         assertThat(testCharacter.getMaxHP()).isEqualTo(UPDATED_MAX_HP);
         assertThat(testCharacter.getCurrentHP()).isEqualTo(UPDATED_CURRENT_HP);
         assertThat(testCharacter.getStrength()).isEqualTo(UPDATED_STRENGTH);
         assertThat(testCharacter.getDexterity()).isEqualTo(UPDATED_DEXTERITY);
+        assertThat(testCharacter.getConstitution()).isEqualTo(UPDATED_CONSTITUTION);
         assertThat(testCharacter.getWisdom()).isEqualTo(UPDATED_WISDOM);
         assertThat(testCharacter.getIntelligence()).isEqualTo(UPDATED_INTELLIGENCE);
         assertThat(testCharacter.getCharisma()).isEqualTo(UPDATED_CHARISMA);
-        assertThat(testCharacter.getAlignment()).isEqualTo(UPDATED_ALIGNMENT);
         assertThat(testCharacter.getBackground()).isEqualTo(UPDATED_BACKGROUND);
-        assertThat(testCharacter.getRace()).isEqualTo(UPDATED_RACE);
+        assertThat(testCharacter.getExp()).isEqualTo(UPDATED_EXP);
+        assertThat(testCharacter.getLevel()).isEqualTo(UPDATED_LEVEL);
 
         // Validate the Character in Elasticsearch
         Character characterEs = characterSearchRepository.findOne(testCharacter.getId());
@@ -476,22 +485,23 @@ public class CharacterResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(character.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].exp").value(hasItem(DEFAULT_EXP.intValue())))
-            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)))
+            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE.toString())))
             .andExpect(jsonPath("$.[*].classes").value(hasItem(DEFAULT_CLASSES.toString())))
             .andExpect(jsonPath("$.[*].sex").value(hasItem(DEFAULT_SEX.toString())))
+            .andExpect(jsonPath("$.[*].alignment").value(hasItem(DEFAULT_ALIGNMENT.toString())))
             .andExpect(jsonPath("$.[*].height").value(hasItem(DEFAULT_HEIGHT.toString())))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT)))
             .andExpect(jsonPath("$.[*].maxHP").value(hasItem(DEFAULT_MAX_HP)))
             .andExpect(jsonPath("$.[*].currentHP").value(hasItem(DEFAULT_CURRENT_HP)))
             .andExpect(jsonPath("$.[*].strength").value(hasItem(DEFAULT_STRENGTH)))
             .andExpect(jsonPath("$.[*].dexterity").value(hasItem(DEFAULT_DEXTERITY)))
+            .andExpect(jsonPath("$.[*].constitution").value(hasItem(DEFAULT_CONSTITUTION)))
             .andExpect(jsonPath("$.[*].wisdom").value(hasItem(DEFAULT_WISDOM)))
             .andExpect(jsonPath("$.[*].intelligence").value(hasItem(DEFAULT_INTELLIGENCE)))
             .andExpect(jsonPath("$.[*].charisma").value(hasItem(DEFAULT_CHARISMA)))
-            .andExpect(jsonPath("$.[*].alignment").value(hasItem(DEFAULT_ALIGNMENT.toString())))
             .andExpect(jsonPath("$.[*].background").value(hasItem(DEFAULT_BACKGROUND.toString())))
-            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE.toString())));
+            .andExpect(jsonPath("$.[*].exp").value(hasItem(DEFAULT_EXP.intValue())))
+            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)));
     }
 
     @Test

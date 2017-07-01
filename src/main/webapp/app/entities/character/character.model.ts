@@ -44,6 +44,7 @@ export class Character implements BaseEntity {
         public currentHP?: number,
         public strength?: number,
         public dexterity?: number,
+        public constitution?: number,
         public wisdom?: number,
         public intelligence?: number,
         public charisma?: number,

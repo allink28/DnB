@@ -64,6 +64,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="constitution" type="integer">
+                <constraints nullable="true" />
+            </column>
+
             <column name="wisdom" type="integer">
                 <constraints nullable="true" />
             </column>
