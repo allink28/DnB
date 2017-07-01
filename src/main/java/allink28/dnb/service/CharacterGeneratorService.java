@@ -15,6 +15,8 @@ import java.util.Random;
 
 
 /**
+ * This class is for methods relating to generating character attributes.
+ * Some are random, some are influenced by other attributes.
  * Created by allenpreville on 6/25/17.
  */
 public class CharacterGeneratorService {
@@ -42,27 +44,26 @@ public class CharacterGeneratorService {
 
     }
 
-    public static Race randomRace() {
-        Race[] races = Race.values();
-        return races[rand.nextInt(races.length)];
-    }
-
-    public static String randomClass() {
-        Classes[] classes = Classes.values();
-        return classes[rand.nextInt(classes.length)].toString();
-    }
-
     public static Sex randomSex() {
         Sex[] sexes = Sex.values();
         return sexes[rand.nextInt(sexes.length)];
     }
 
-    public static Alignment randomAlignment() {
-        return Alignment.ALIGNMENTS[rand.nextInt(Alignment.ALIGNMENTS.length)];
+    public static Race randomRace() {
+        Race[] races = Race.values();
+        return races[rand.nextInt(races.length)];
     }
 
     /*
-     * Possible TODO: Random alignment based on Character's class and race.
+     * TODO Make race have a small influence on class
+     */
+    public static String randomClass() {
+        Classes[] classes = Classes.values();
+        return classes[rand.nextInt(classes.length)].toString();
+    }
+
+    /**
+     * Random alignment potentially influenced by Character's class and race.
      * E.g., Paladins more likely to be lawful. Half-elves more likely to be chaotic.
      */
     public static Alignment randomAlignment(Character character) {
@@ -159,52 +160,8 @@ public class CharacterGeneratorService {
         return randomAlignment();
     }
 
-    /**
-     * Generate a random character height (in inches) based on race and sex.
-     */
-    public static String randomHeight(Character character) {
-        int height;
-        Race race = character.getRace();
-
-        switch (race) {
-            case Human:
-                //67" average male height, 62" average female
-                height = dndRandom(56, 10,10);
-                if (Sex.Female == character.getSex()) {
-                    height -= rand.nextInt(5);
-                }
-                break;
-            case Dwarf:
-                //4' for mountain dwarf, 3'8" for hill dwarf. Todo What do?
-                height = dndRandom(48, 4,4);
-                break;
-            case Elf:
-                height = dndRandom(54, 10,10);
-                break;
-            case Halfling:
-                height = dndRandom(21, 4,4);
-                break;
-            case Dragonborn:
-                height = dndRandom(66, 8,8);
-                break;
-            case Gnome:
-                height = dndRandom(35, 4,4);
-                break;
-            case Half_Elf:
-                height = dndRandom(57, 8,8);
-                break;
-            case Half_Orc:
-                height = dndRandom(58, 10,10);
-                break;
-            case Tiefling:
-                height = dndRandom(57, 8,8);
-                break;
-            default:
-                log.error("Unknown race " + race);
-                return null;
-        }
-
-        return inchesToFormattedHeight(height);
+    public static Alignment randomAlignment() {
+        return Alignment.ALIGNMENTS[rand.nextInt(Alignment.ALIGNMENTS.length)];
     }
 
     public static String inchesToFormattedHeight(int inches) {
@@ -277,7 +234,7 @@ public class CharacterGeneratorService {
 
     public static void generateStats(Character character) {
         List<Integer> rolls = new ArrayList<>(6);
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 6; ++i) {
             rolls.add(rollStat());
         }
         Collections.sort(rolls);
@@ -299,7 +256,7 @@ public class CharacterGeneratorService {
                 case Bard:
                     character.setCharisma(rolls.remove(rolls.size() - 1));
                     Collections.shuffle(rolls);
-//                    character.setCo
+                    character.setConstitution(rolls.remove(0));
                     character.setStrength(rolls.remove(0));
                     character.setDexterity(rolls.remove(0));
                     character.setWisdom(rolls.remove(0));
@@ -309,22 +266,25 @@ public class CharacterGeneratorService {
                     character.setCharisma(rolls.remove(rolls.size() - 1));
                     character.setStrength(rolls.remove(0));
                     Collections.shuffle(rolls);
+                    character.setConstitution(rolls.remove(0));
                     character.setDexterity(rolls.remove(0));
                     character.setWisdom(rolls.remove(0));
                     character.setIntelligence(rolls.remove(0));
                     break;
                 case Barbarian:
                     character.setStrength(rolls.remove(rolls.size() - 1));
-                    Collections.shuffle(rolls);
-                    character.setStrength(rolls.remove(0));
-                    character.setDexterity(rolls.remove(0));
-                    character.setWisdom(rolls.remove(0));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
                     character.setIntelligence(rolls.remove(0));
+                    character.setWisdom(rolls.remove(0));
+                    Collections.shuffle(rolls);
+                    character.setCharisma(rolls.remove(0));
+                    character.setDexterity(rolls.remove(0));
                     break;
                 case Sorcerer:
                     character.setCharisma(rolls.remove(rolls.size() - 1));
-                    Collections.shuffle(rolls);
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
                     character.setStrength(rolls.remove(0));
+                    Collections.shuffle(rolls);
                     character.setDexterity(rolls.remove(0));
                     character.setWisdom(rolls.remove(0));
                     character.setIntelligence(rolls.remove(0));
@@ -348,6 +308,7 @@ public class CharacterGeneratorService {
             Collections.shuffle(rolls);
             character.setStrength(rolls.remove(0));
             character.setDexterity(rolls.remove(0));
+            character.setConstitution(rolls.remove(0));
             character.setWisdom(rolls.remove(0));
             character.setIntelligence(rolls.remove(0));
             character.setCharisma(rolls.remove(0));
@@ -390,6 +351,9 @@ public class CharacterGeneratorService {
         }
     }
 
+    /**
+     * @return The sum of 3d6 + 3, dropping the lowest d6 roll.
+     */
     public static int rollStat() {
         int lowestRoll = 6;
         int total = 3;
