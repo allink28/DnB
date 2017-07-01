@@ -89,7 +89,7 @@ public class CharacterGeneratorService {
                 case Rogue:
                     if (rand.nextInt(2) == 0) { //~50% of being not Lawful-Good
                         Alignment[] rogueAlignments = { Alignment.Neutral_Good, Alignment.Chaotic_Good, Alignment.True_Neutral,
-                            Alignment.Neutral_Evil, Alignment.Lawful_Neutral, Alignment.Chaotic_Neutral, Alignment.Lawful_Evil, Alignment.Chaotic_evil
+                            Alignment.Neutral_Evil, Alignment.Lawful_Neutral, Alignment.Chaotic_Neutral, Alignment.Lawful_Evil, Alignment.Chaotic_Evil
                         };
                         return rogueAlignments[rand.nextInt(rogueAlignments.length)];
                     }
@@ -97,7 +97,7 @@ public class CharacterGeneratorService {
                 case Bard:
                     if (rand.nextInt(3) == 0) { //~33% of being not Lawful
                         Alignment[] rogueAlignments = { Alignment.Neutral_Good, Alignment.Chaotic_Good, Alignment.True_Neutral,
-                            Alignment.Neutral_Evil, Alignment.Chaotic_Neutral, Alignment.Chaotic_evil
+                            Alignment.Neutral_Evil, Alignment.Chaotic_Neutral, Alignment.Chaotic_Evil
                         };
                         return rogueAlignments[rand.nextInt(rogueAlignments.length)];
                     }
@@ -151,7 +151,7 @@ public class CharacterGeneratorService {
                 if (goodness > 4) { //~50% chance of good
                     return Alignment.Lawful_Good;
                 } else if (goodness < 4) { //~40% of evil
-                    return Alignment.Chaotic_evil;
+                    return Alignment.Chaotic_Evil;
                 }
                 break;
         }
