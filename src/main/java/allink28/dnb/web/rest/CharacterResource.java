@@ -83,8 +83,12 @@ public class CharacterResource {
         if ((character.getHeight() == null || character.getHeight().isEmpty())
             && (character.getWeight() == null || character.getWeight() == 0))
             CharacterGeneratorService.setRandomHeightWeight(character);
-        if (character.getStrength() == null)
+        if (character.getStrength() == null || character.getStrength() < 1)
             CharacterGeneratorService.generateStats(character);
+        if ((character.getConstitution() != null && character.getConstitution() > 0) &&
+            (character.getMaxHP() == null || character.getMaxHP() < 1)) {
+            character.setMaxHP(CharacterGeneratorService.calculateMaxHP(character));
+        }
 
         character = characterService.save(character);
 

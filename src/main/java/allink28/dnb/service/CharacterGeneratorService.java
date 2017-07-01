@@ -393,7 +393,6 @@ public class CharacterGeneratorService {
             character.setCharisma(rolls.remove(0));
         }
         addRaceStatBonuses(character);
-        //calculate maxHP
     }
 
     private static void addRaceStatBonuses(Character character) {
@@ -460,6 +459,41 @@ public class CharacterGeneratorService {
             default:
                 log.error("Unknown race " + character.getRace());
         }
+    }
+
+    public static int calculateMaxHP(Character character) {
+        Classes aClass = Classes.valueOf(character.getClasses());
+        return calculateMaxHP(character.getConstitution(), aClass);
+    }
+
+    public static int calculateMaxHP(int rawConstitution, Classes aClass) {
+        int conModifier = statModifier(rawConstitution);
+        switch (aClass) {
+            case Sorcerer:
+            case Wizard:
+                return conModifier + rollDie(6);
+            case Bard:
+            case Cleric:
+            case Druid:
+            case Monk:
+            case Rogue:
+            case Warlock:
+                return conModifier + rollDie(8);
+            case Fighter:
+            case Paladin:
+            case Ranger:
+                return conModifier + rollDie(10);
+            case Barbarian:
+                return conModifier + rollDie(12);
+            default:
+                log.error("Couldn't determine class for calculating Max HP");
+                return -1;
+        }
+    }
+
+    public static int statModifier(int rawStat) {
+//        floor( (ability_score - 10) / 2 )
+        return (int) Math.floor( (rawStat - 10) / 2);
     }
 
     /**
