@@ -87,7 +87,7 @@ public class CharacterResource {
             CharacterGeneratorService.generateStats(character);
         if ((character.getConstitution() != null && character.getConstitution() > 0) &&
             (character.getMaxHP() == null || character.getMaxHP() < 1)) {
-            character.setMaxHP(CharacterGeneratorService.calculateMaxHP(character));
+            character.setMaxHP(CharacterGeneratorService.calculateLvl1MaxHP(character));
         }
 
         character = characterService.save(character);

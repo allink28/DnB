@@ -1,8 +1,5 @@
 package allink28.dnb.service;
 
-import allink28.dnb.domain.Character;
-import allink28.dnb.domain.enumeration.Race;
-import allink28.dnb.domain.enumeration.Sex;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,15 +51,15 @@ public class CharacterGeneratorServiceTest {
         log.info(logOutput.toString());
     }
 
-    @Test
-    public void randomHeightTest() {
-        Character character = new Character();
-        character.setRace(Race.Human);
-        character.setSex(Sex.Male);
-        for (int i = 0; i < 20; ++i) {
-            log.info("Height: " + CharacterGeneratorService.randomHeight(character));
-        }
-    }
+//    @Test
+//    public void randomHeightTest() {
+//        Character character = new Character();
+//        character.setRace(Race.Human);
+//        character.setSex(Sex.Male);
+//        for (int i = 0; i < 20; ++i) {
+//            log.info("Height: " + CharacterGeneratorService.randomHeight(character));
+//        }
+//    }
 
     /**
      * Test distrubution of DnD's method of random by testing it out on height (in inches)

@@ -461,30 +461,33 @@ public class CharacterGeneratorService {
         }
     }
 
-    public static int calculateMaxHP(Character character) {
+    public static int calculateLvl1MaxHP(Character character) {
         Classes aClass = Classes.valueOf(character.getClasses());
-        return calculateMaxHP(character.getConstitution(), aClass);
+        return calculateLvl1MaxHP(character.getConstitution(), aClass);
     }
 
-    public static int calculateMaxHP(int rawConstitution, Classes aClass) {
+    /**
+     * A Level 1 character gets the max roll of the die
+     */
+    public static int calculateLvl1MaxHP(int rawConstitution, Classes aClass) {
         int conModifier = statModifier(rawConstitution);
         switch (aClass) {
             case Sorcerer:
             case Wizard:
-                return conModifier + rollDie(6);
+                return conModifier + 6;//rollDie(6);
             case Bard:
             case Cleric:
             case Druid:
             case Monk:
             case Rogue:
             case Warlock:
-                return conModifier + rollDie(8);
+                return conModifier + 8;//rollDie(8);
             case Fighter:
             case Paladin:
             case Ranger:
-                return conModifier + rollDie(10);
+                return conModifier + 10;//rollDie(10);
             case Barbarian:
-                return conModifier + rollDie(12);
+                return conModifier + 12;//rollDie(12);
             default:
                 log.error("Couldn't determine class for calculating Max HP");
                 return -1;
