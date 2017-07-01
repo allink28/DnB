@@ -83,6 +83,8 @@ public class CharacterResource {
         if ((character.getHeight() == null || character.getHeight().isEmpty())
             && (character.getWeight() == null || character.getWeight() == 0))
             CharacterGeneratorService.setRandomHeightWeight(character);
+        if (character.getStrength() == null)
+            CharacterGeneratorService.generateStats(character);
 
         character = characterService.save(character);
 

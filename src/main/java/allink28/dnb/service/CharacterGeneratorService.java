@@ -8,6 +8,9 @@ import allink28.dnb.domain.enumeration.Sex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 
@@ -63,10 +66,8 @@ public class CharacterGeneratorService {
      * E.g., Paladins more likely to be lawful. Half-elves more likely to be chaotic.
      */
     public static Alignment randomAlignment(Character character) {
-        String characterClass = character.getClasses();
-        Race race = character.getRace();
         try {
-            Classes thisClass = Classes.valueOf(characterClass);
+            Classes thisClass = Classes.valueOf(character.getClasses());
             switch (thisClass) {
                 case Paladin:
                     if (rand.nextInt(2) == 0) //~50% of being lawful good
@@ -113,10 +114,10 @@ public class CharacterGeneratorService {
                     break;
             }
         } catch (IllegalArgumentException e) {
-            log.error("Unable to parse class: " + characterClass + ". " + e.getMessage() + " Disregarding class for alignment random alignment.");
+            log.error("Unable to parse class: " + character.getClasses() + ". " + e.getMessage() + " Disregarding class for alignment. Selecting random alignment.");
         }
 
-        switch (race) {
+        switch (character.getRace()) {
             case Dwarf:
             case Halfling:
                 if (rand.nextInt(2) == 0) { //~50% Lawful Good
@@ -272,6 +273,133 @@ public class CharacterGeneratorService {
             default:
                 log.error("Unknown race " + race);
         }
+    }
+
+    public static void generateStats(Character character) {
+        List<Integer> rolls = new ArrayList<>(6);
+        for (int i = 0; i < 5; ++i) {
+            rolls.add(rollStat());
+        }
+        Collections.sort(rolls);
+        try {
+            Classes thisClass = Classes.valueOf(character.getClasses());
+            switch (thisClass) {
+                case Paladin:
+
+                    break;
+                case Monk:
+
+                    break;
+                case Druid:
+
+                    break;
+                case Rogue:
+
+                    break;
+                case Bard:
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    Collections.shuffle(rolls);
+//                    character.setCo
+                    character.setStrength(rolls.remove(0));
+                    character.setDexterity(rolls.remove(0));
+                    character.setWisdom(rolls.remove(0));
+                    character.setIntelligence(rolls.remove(0));
+                    break;
+                case Warlock:
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    character.setStrength(rolls.remove(0));
+                    Collections.shuffle(rolls);
+                    character.setDexterity(rolls.remove(0));
+                    character.setWisdom(rolls.remove(0));
+                    character.setIntelligence(rolls.remove(0));
+                    break;
+                case Barbarian:
+                    character.setStrength(rolls.remove(rolls.size() - 1));
+                    Collections.shuffle(rolls);
+                    character.setStrength(rolls.remove(0));
+                    character.setDexterity(rolls.remove(0));
+                    character.setWisdom(rolls.remove(0));
+                    character.setIntelligence(rolls.remove(0));
+                    break;
+                case Sorcerer:
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    Collections.shuffle(rolls);
+                    character.setStrength(rolls.remove(0));
+                    character.setDexterity(rolls.remove(0));
+                    character.setWisdom(rolls.remove(0));
+                    character.setIntelligence(rolls.remove(0));
+                    break;
+                case Fighter:
+
+                    break;
+                case Wizard:
+
+                    break;
+                case Ranger:
+
+                    break;
+                case Cleric:
+
+                    break;
+                default:
+            }
+        } catch (IllegalArgumentException e) {
+            log.error("Unable to parse class: " + character.getClasses() + ". " + e.getMessage() + " Disregarding class for stat allocation. Randomly generating.");
+            Collections.shuffle(rolls);
+            character.setStrength(rolls.remove(0));
+            character.setDexterity(rolls.remove(0));
+            character.setWisdom(rolls.remove(0));
+            character.setIntelligence(rolls.remove(0));
+            character.setCharisma(rolls.remove(0));
+        }
+        addRaceStatBonuses(character);
+        //calculate maxHP
+    }
+
+    private static void addRaceStatBonuses(Character character) {
+        switch (character.getRace()) {
+            case Human:
+
+                break;
+            case Dwarf:
+
+                break;
+            case Elf:
+
+                break;
+            case Halfling:
+
+                break;
+            case Dragonborn:
+
+                break;
+            case Gnome:
+
+                break;
+            case Half_Elf:
+
+                break;
+            case Half_Orc:
+
+                break;
+            case Tiefling:
+
+                break;
+            default:
+                log.error("Unknown race " + character.getRace());
+        }
+    }
+
+    public static int rollStat() {
+        int lowestRoll = 6;
+        int total = 3;
+        for (int i = 0; i < 3; ++i) {
+            int roll = rand.nextInt(6) + 1;
+            total += roll;
+            lowestRoll = Math.min(lowestRoll, roll);
+        }
+        total -= lowestRoll;
+        return total;
     }
 
     public static int rollDie(int... dieSides) {

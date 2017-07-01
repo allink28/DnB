@@ -90,6 +90,26 @@ public class CharacterGeneratorServiceTest {
         }
     }
 
+    //
+    @Test
+    public void statRollTest() {
+        long sum = 0;
+        int[] distribution = new int[21];
+
+        for (int i = 0; i < 500; ++i) {
+            int randomNumber = CharacterGeneratorService.rollStat();
+            sum += randomNumber;
+            ++distribution[randomNumber];
+        }
+        log.info("Sum: " + sum + " Average: " + (sum/(double)500));
+        for (int i = 5; i < distribution.length; ++i) {
+            String output = "i=" + i + " \tHits: " + distribution[i] + " \t";
+            for (int j = 0; j < distribution[i]/2; ++j) {
+                output += "+";
+            }
+            log.info(output);
+        }
+    }
 
     // -------------- Random distribution tests ----------------
 
