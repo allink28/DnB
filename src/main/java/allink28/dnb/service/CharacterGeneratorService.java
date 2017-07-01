@@ -242,64 +242,143 @@ public class CharacterGeneratorService {
             Classes thisClass = Classes.valueOf(character.getClasses());
             switch (thisClass) {
                 case Paladin:
-
-                    break;
-                case Monk:
-
-                    break;
-                case Druid:
-
-                    break;
-                case Rogue:
-
-                    break;
-                case Bard:
-                    character.setCharisma(rolls.remove(rolls.size() - 1));
-                    Collections.shuffle(rolls);
-                    character.setConstitution(rolls.remove(0));
-                    character.setStrength(rolls.remove(0));
-                    character.setDexterity(rolls.remove(0));
-                    character.setWisdom(rolls.remove(0));
+                    character.setCharisma(rolls.remove(rolls.size() - 2));
+                    character.setConstitution(rolls.remove(rolls.size() - 2));
                     character.setIntelligence(rolls.remove(0));
-                    break;
-                case Warlock:
-                    character.setCharisma(rolls.remove(rolls.size() - 1));
-                    character.setStrength(rolls.remove(0));
-                    Collections.shuffle(rolls);
-                    character.setConstitution(rolls.remove(0));
-                    character.setDexterity(rolls.remove(0));
+                    if (rand.nextInt(2) == 0) {
+                        character.setStrength(rolls.remove(rolls.size() - 1));
+                        Collections.shuffle(rolls);
+                        character.setDexterity(rolls.remove(0));
+                    } else {
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                        Collections.shuffle(rolls);
+                        character.setStrength(rolls.remove(0));
+                    }
                     character.setWisdom(rolls.remove(0));
-                    character.setIntelligence(rolls.remove(0));
                     break;
                 case Barbarian:
                     character.setStrength(rolls.remove(rolls.size() - 1));
                     character.setConstitution(rolls.remove(rolls.size() - 1));
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
                     character.setIntelligence(rolls.remove(0));
-                    character.setWisdom(rolls.remove(0));
                     Collections.shuffle(rolls);
+                    character.setWisdom(rolls.remove(0));
                     character.setCharisma(rolls.remove(0));
-                    character.setDexterity(rolls.remove(0));
+                    break;
+                case Fighter:
+                    if (rand.nextInt(2) == 0) {
+                        character.setStrength(rolls.remove(rolls.size() - 1));
+                        character.setConstitution(rolls.remove(rolls.size() - 1));
+                        character.setWisdom(rolls.remove(rolls.size() - 1));
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                    } else {
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                        character.setConstitution(rolls.remove(rolls.size() - 1));
+                        character.setWisdom(rolls.remove(rolls.size() - 1));
+                        character.setStrength(rolls.remove(0));
+                    }
+                    Collections.shuffle(rolls);
+                    character.setIntelligence(rolls.remove(0));
+                    character.setCharisma(rolls.remove(0));
+                    break;
+                case Ranger:
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
+                    character.setWisdom(rolls.remove(rolls.size() - 1));
+                    character.setIntelligence(rolls.remove(rolls.size() - 1));
+                    character.setStrength(rolls.remove(rolls.size() - 1));
+                    character.setCharisma(rolls.remove(0)); //dump stat
+                    break;
+                case Monk:
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
+                    character.setWisdom(rolls.remove(rolls.size() - 1));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
+                    character.setIntelligence(rolls.remove(0));
+                    Collections.shuffle(rolls);
+                    character.setStrength(rolls.remove(0));
+                    character.setCharisma(rolls.remove(0));
+                    break;
+                case Rogue:
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    character.setStrength(rolls.remove(0));
+                    character.setIntelligence(rolls.remove(0)); //Exception to rule is Arcane Tricksters, they want high Int
+                    Collections.shuffle(rolls);
+                    character.setWisdom(rolls.remove(0));
+                    character.setConstitution(rolls.remove(0));
+                    break;
+                case Bard:
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
+                    if (rand.nextInt(2) == 0) { //Make either Wis or Int the dump stat
+                        character.setWisdom(rolls.remove(0));
+                        Collections.shuffle(rolls);
+                        character.setIntelligence(rolls.remove(0));
+                    } else {
+                        character.setIntelligence(rolls.remove(0));
+                        Collections.shuffle(rolls);
+                        character.setWisdom(rolls.remove(0));
+                    }
+                    character.setStrength(rolls.remove(0));
+                    break;
+                case Warlock:
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    if (rand.nextInt(2) == 0) {
+                        character.setConstitution(rolls.remove(rolls.size() - 1));
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                    } else {
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                        character.setConstitution(rolls.remove(rolls.size() - 1));
+                    }
+                    character.setStrength(rolls.remove(0));
+                    if (rand.nextInt(2) == 0) {
+                        character.setIntelligence(rolls.remove(0));
+                        character.setWisdom(rolls.remove(0));
+                    } else {
+                        character.setWisdom(rolls.remove(0));
+                        character.setIntelligence(rolls.remove(0));
+                    }
                     break;
                 case Sorcerer:
                     character.setCharisma(rolls.remove(rolls.size() - 1));
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
                     character.setConstitution(rolls.remove(rolls.size() - 1));
                     character.setStrength(rolls.remove(0));
                     Collections.shuffle(rolls);
-                    character.setDexterity(rolls.remove(0));
                     character.setWisdom(rolls.remove(0));
                     character.setIntelligence(rolls.remove(0));
                     break;
-                case Fighter:
-
-                    break;
                 case Wizard:
-
+                    character.setIntelligence(rolls.remove(rolls.size() - 1));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
+                    character.setWisdom(rolls.remove(rolls.size() - 1));
+                    character.setCharisma(rolls.remove(rolls.size() - 1));
+                    character.setStrength(rolls.remove(0));
                     break;
-                case Ranger:
-
+                case Druid:
+                    character.setWisdom(rolls.remove(rolls.size() - 1));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
+                    character.setDexterity(rolls.remove(rolls.size() - 1));
+                    Collections.shuffle(rolls);
+                    character.setStrength(rolls.remove(0));
+                    character.setIntelligence(rolls.remove(0));
+                    character.setCharisma(rolls.remove(0));
                     break;
                 case Cleric:
-
+                    character.setWisdom(rolls.remove(rolls.size() - 1));
+                    character.setConstitution(rolls.remove(rolls.size() - 1));
+                    if (rand.nextInt(2) == 0) {
+                        character.setStrength(rolls.remove(rolls.size() - 1));
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                    } else {
+                        character.setDexterity(rolls.remove(rolls.size() - 1));
+                        character.setStrength(rolls.remove(rolls.size() - 1));
+                    }
+                    Collections.shuffle(rolls);
+                    character.setIntelligence(rolls.remove(0));
+                    character.setCharisma(rolls.remove(0));
                     break;
                 default:
             }
