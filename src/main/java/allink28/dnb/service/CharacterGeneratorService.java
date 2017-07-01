@@ -399,31 +399,63 @@ public class CharacterGeneratorService {
     private static void addRaceStatBonuses(Character character) {
         switch (character.getRace()) {
             case Human:
-
+                character.setStrength(character.getStrength() + 1);
+                character.setDexterity(character.getDexterity() + 1);
+                character.setConstitution(character.getConstitution() + 1);
+                character.setIntelligence(character.getIntelligence() + 1);
+                character.setWisdom(character.getWisdom() + 1);
+                character.setCharisma(character.getCharisma() + 1);
                 break;
             case Dwarf:
-
+                character.setConstitution(character.getConstitution() + 2);
                 break;
             case Elf:
-
+                character.setDexterity(character.getDexterity() + 2);
                 break;
             case Halfling:
-
+                character.setDexterity(character.getDexterity() + 2);
                 break;
             case Dragonborn:
-
+                character.setStrength(character.getStrength() + 2);
+                character.setCharisma(character.getCharisma() + 1);
                 break;
             case Gnome:
-
+                character.setIntelligence(character.getIntelligence() + 2);
                 break;
             case Half_Elf:
-
+                character.setCharisma(character.getCharisma() + 2);
+                int[] statIncreases = new int[2];
+                do {
+                    statIncreases[0] = rand.nextInt(5);
+                    statIncreases[1] = rand.nextInt(5);
+                } while (statIncreases[0] == statIncreases[1]);
+                for (int stat : statIncreases) {
+                    switch (stat) {
+                        case 0:
+                            character.setStrength(character.getStrength() + 1);
+                            break;
+                        case 1:
+                            character.setDexterity(character.getDexterity() + 1);
+                            break;
+                        case 2:
+                            character.setConstitution(character.getConstitution() + 1);
+                            break;
+                        case 3:
+                            character.setIntelligence(character.getIntelligence() + 1);
+                            break;
+                        case 4:
+                            character.setWisdom(character.getWisdom() + 1);
+                            break;
+                    }
+                }
                 break;
             case Half_Orc:
-
+                character.setStrength(character.getStrength() + 2);
+                character.setConstitution(character.getConstitution() + 1);
                 break;
             case Tiefling:
-
+                character.setIntelligence(character.getIntelligence() + 1);
+                character.setCharisma(character.getCharisma() + 2);
                 break;
             default:
                 log.error("Unknown race " + character.getRace());
