@@ -22,34 +22,35 @@
             <input type="text" class="form-control" name="name" id="field_name"
                    [(ngModel)]="character.name" />
         </div>
-        <!--<div class="form-group">-->
-            <!--<label class="form-control-label" for="field_race">Race</label>-->
-            <!--<select class="form-control" name="race" [(ngModel)]="character.race" id="field_race" >-->
-                <!--<option value="Dragonborn">Dragonborn</option>-->
-                <!--<option value="Dwarf">Dwarf</option>-->
-                <!--<option value="Elf">Elf</option>-->
-                <!--<option value="Gnome">Gnome</option>-->
-                <!--<option value="Half_Elf">Half_Elf</option>-->
-                <!--<option value="Half_Orc">Half_Orc</option>-->
-                <!--<option value="Halfling">Halfling</option>-->
-                <!--<option value="Human">Human</option>-->
-                <!--<option value="Tiefling">Tiefling</option>-->
-            <!--</select>-->
-        <!--</div>-->
+        <div class="form-group">
+            <label class="form-control-label" for="field_race">Race</label>
+            <select class="form-control" name="race" [(ngModel)]="character.race" id="field_race" >
+                <option value="Dragonborn">Dragonborn</option>
+                <option value="Dwarf">Dwarf</option>
+                <option value="Elf">Elf</option>
+                <option value="Gnome">Gnome</option>
+                <option value="Half_Elf">Half_Elf</option>
+                <option value="Half_Orc">Half_Orc</option>
+                <option value="Halfling">Halfling</option>
+                <option value="Human">Human</option>
+                <option value="Tiefling">Tiefling</option>
+            </select>
+        </div>
 
-        <!--<div class="form-group">-->
-            <!--<label class="form-control-label" for="field_classes">Classes</label>-->
-            <!--<input type="text" class="form-control" name="classes" id="field_classes"-->
-                   <!--[(ngModel)]="character.classes"  />-->
-        <!--</div>-->
+        <div class="form-group">
+            <label class="form-control-label" for="field_sex">Sex</label>
+            <select class="form-control" name="sex" [(ngModel)]="character.sex" id="field_sex" >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
 
-        <!--<div class="form-group">-->
-            <!--<label class="form-control-label" for="field_sex">Sex</label>-->
-            <!--<select class="form-control" name="sex" [(ngModel)]="character.sex" id="field_sex" >-->
-                <!--<option value="Male">Male</option>-->
-                <!--<option value="Female">Female</option>-->
-            <!--</select>-->
-        <!--</div>-->
+        <div class="form-group">
+            <label class="form-control-label" for="field_classes">Classes</label>
+            <input type="text" class="form-control" name="classes" id="field_classes"
+                   [(ngModel)]="character.classes"  />
+        </div>
+
 
         <!--<div class="form-group">-->
             <!--<label class="form-control-label" for="field_alignment">Alignment</label>-->
