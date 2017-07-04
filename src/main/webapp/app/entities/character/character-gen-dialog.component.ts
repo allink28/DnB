@@ -30,7 +30,7 @@ export class CharacterGenDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.character.level = 0;
+        this.character.level = 1;
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
     }
