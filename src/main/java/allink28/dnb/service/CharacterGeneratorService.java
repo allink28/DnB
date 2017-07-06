@@ -23,26 +23,7 @@ public class CharacterGeneratorService {
 
     private static final Logger log = LoggerFactory.getLogger(CharacterGeneratorService.class);
 
-    private static final String[] PREFIX = {
-        "A", "Al", "An", "Ang", "B", "Br", "C", "Ch", "Chr", "D", "E", "Er",
-        "F", "G", "Gr", "H", "I", "In", "J", "K", "Kn", "L", "M", "N", "P",
-        "Qu", "R", "S", "Sh", "St", "T", "Tr", "Th", "V", "W", "X", "Y", "Z"};
-    private static final String[] VOWELS = {"a", "e", "i", "o", "u", "y"};
-    private static final String[] POSTFIX = {
-        "a", "an", "b", "brey", "c", "ch", "ck", "d", "e", "en", "f",
-        "g", "gh", "h", "i", "ith", "j", "k",
-        "la", "le", "ley", "ll", "lo", "m", "n", "nas", "nes", "net", "non",
-        "p", "que", "r", "ret", "rt", "ry", "s", "st", "t", "tor", "th",
-        "v", "ven", "w", "wart", "x", "y", "ya", "z"};
-
     private static Random rand = new Random();
-
-    public static String generateName() {
-        return PREFIX[rand.nextInt(PREFIX.length)] +
-            VOWELS[rand.nextInt(VOWELS.length)] +
-            POSTFIX[rand.nextInt(POSTFIX.length)];
-
-    }
 
     public static Sex randomSex() {
         Sex[] sexes = Sex.values();

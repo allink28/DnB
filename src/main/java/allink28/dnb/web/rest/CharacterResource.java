@@ -3,6 +3,7 @@ package allink28.dnb.web.rest;
 import allink28.dnb.domain.Character;
 import allink28.dnb.service.CharacterGeneratorService;
 import allink28.dnb.service.CharacterService;
+import allink28.dnb.service.NameGeneratorService;
 import allink28.dnb.web.rest.util.HeaderUtil;
 import allink28.dnb.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -67,13 +68,14 @@ public class CharacterResource {
         if (character == null)
             character = new Character();
 
-        if (character.getName() == null || character.getName().isEmpty())
-            character.setName(CharacterGeneratorService.generateName());
-
-        if (character.getLevel() == null)
-            character.setLevel(0);
         if (character.getSex() == null)
             character.setSex(CharacterGeneratorService.randomSex());
+        if (character.getName() == null || character.getName().isEmpty())
+            character.setName(NameGeneratorService.generateName(character));
+
+        if (character.getLevel() == null)
+            character.setLevel(1);
+
         if (character.getRace() == null)
             character.setRace(CharacterGeneratorService.randomRace());
         if (character.getClasses() == null || character.getClasses().isEmpty())

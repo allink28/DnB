@@ -16,18 +16,6 @@ public class CharacterGeneratorServiceTest {
     private final Logger log = LoggerFactory.getLogger(CharacterGeneratorServiceTest.class);
 
     @Test
-    public void generateNameTest() {
-        StringBuilder logOutput = new StringBuilder("\n");
-        for (int i = 0; i < 50; ++i) {
-            String name = CharacterGeneratorService.generateName();
-            assertTrue("Name: " + name + " is not correct.",
-                !name.isEmpty() && java.lang.Character.isUpperCase(name.charAt(0)));
-            logOutput.append(name).append(" ");
-        }
-        log.info(logOutput.toString());
-    }
-
-    @Test
     public void randomRaceTest() {
         StringBuilder logOutput = new StringBuilder("\n");
         for (int i = 0; i < 20; ++i) {
