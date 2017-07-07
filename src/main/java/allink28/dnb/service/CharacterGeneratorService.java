@@ -35,9 +35,51 @@ public class CharacterGeneratorService {
         return races[rand.nextInt(races.length)];
     }
 
-    /*
-     * TODO Make race have a small influence on class
+    /**
+     * A class that takes a character's race into consideration
+     * @return String value of an entry of Classes enum
      */
+    public static String chooseClass(Character character) {
+        switch (character.getRace()) {
+            case Gnome:
+                if (rand.nextInt(2) == 0) { //~50%
+                    return Classes.Bard.toString();
+                }
+                break;
+            case Half_Orc:
+                if (rand.nextInt(2) == 0) { //~50%
+                    return Classes.Barbarian.toString();
+                }
+                break;
+            case Halfling:
+                if (rand.nextInt(3) == 0) { //~33%
+                    return Classes.Rogue.toString();
+                }
+                break;
+            case Dragonborn:
+                if (rand.nextInt(4) == 0) { //~25%
+                    return Classes.Sorcerer.toString();
+                }
+                break;
+            case Dwarf:
+                if (rand.nextInt(4) == 0) { //~25%
+                    return Classes.Barbarian.toString();
+                }
+                break;
+            case Human:
+                break;
+            case Elf:
+                break;
+            case Half_Elf:
+
+                break;
+            case Tiefling:
+
+                break;
+        }
+        return randomClass();
+    }
+
     public static String randomClass() {
         Classes[] classes = Classes.values();
         return classes[rand.nextInt(classes.length)].toString();
@@ -47,7 +89,7 @@ public class CharacterGeneratorService {
      * Random alignment potentially influenced by Character's class and race.
      * E.g., Paladins more likely to be lawful. Half-elves more likely to be chaotic.
      */
-    public static Alignment randomAlignment(Character character) {
+    public static Alignment chooseAlignment(Character character) {
         try {
             Classes thisClass = Classes.valueOf(character.getClasses());
             switch (thisClass) {
@@ -141,7 +183,7 @@ public class CharacterGeneratorService {
         return randomAlignment();
     }
 
-    public static Alignment randomAlignment() {
+    private static Alignment randomAlignment() {
         return Alignment.ALIGNMENTS[rand.nextInt(Alignment.ALIGNMENTS.length)];
     }
 
@@ -152,7 +194,7 @@ public class CharacterGeneratorService {
     /**
      * Generate a random character height and weight based on race
      */
-    public static void setRandomHeightWeight(Character character) {
+    public static void assignHeightWeight(Character character) {
         int heightModifier;
         Race race = character.getRace();
 

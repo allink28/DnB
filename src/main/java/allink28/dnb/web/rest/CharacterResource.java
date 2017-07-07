@@ -79,12 +79,12 @@ public class CharacterResource {
         if (character.getRace() == null)
             character.setRace(CharacterGeneratorService.randomRace());
         if (character.getClasses() == null || character.getClasses().isEmpty())
-            character.setClasses(CharacterGeneratorService.randomClass());
+            character.setClasses(CharacterGeneratorService.chooseClass(character));
         if (character.getAlignment() == null)
-            character.setAlignment(CharacterGeneratorService.randomAlignment(character));
+            character.setAlignment(CharacterGeneratorService.chooseAlignment(character));
         if ((character.getHeight() == null || character.getHeight().isEmpty())
             && (character.getWeight() == null || character.getWeight() == 0))
-            CharacterGeneratorService.setRandomHeightWeight(character);
+            CharacterGeneratorService.assignHeightWeight(character);
         if (character.getStrength() == null || character.getStrength() < 1)
             CharacterGeneratorService.generateStats(character);
         if ((character.getConstitution() != null && character.getConstitution() > 0) &&
